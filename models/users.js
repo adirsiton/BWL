@@ -1,3 +1,6 @@
 var mongoose = require('mongoose');
 
-var
+var user = new mongoose.Schema({
+    facebookId: String,
+    isAdmin : Boolean
+});
