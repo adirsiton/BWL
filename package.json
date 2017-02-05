@@ -14,5 +14,17 @@
     "jade": "~1.11.0",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0"
-  }
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adirsiton/BWL.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adirsiton/BWL/issues"
+  },
+  "homepage": "https://github.com/adirsiton/BWL#readme",
+  "description": ""
 }
