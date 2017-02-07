@@ -1,3 +1,3 @@
-app.controller("homepageCtrl", ['$rootsScope','$scope', function($rootsScope, $scope) {
+app.controller("homepageCtrl", ['$scope', function($scope) {
     
 }])

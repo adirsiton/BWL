@@ -13,8 +13,14 @@
         <!-- BWL App -->
         <script src="/javascripts/app.js"></script>
         <script src="/views/homepage/ctrl.js"></script>
+
+        <!-- BWL stylesheets -->
+        <link rel="stylesheet" href="/stylesheets/main.css">
     </head>
     <body>
-        <ng-view>
+        <div class="main-content">
+            <div ng-view></div>
+        </div>
+        <div class="bwl-navbar"></div>
     </body>
 </html>
