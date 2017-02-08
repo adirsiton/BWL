@@ -1,10 +1,14 @@
 app.controller("homepageCtrl", ['$scope', function ($scope) {
     $scope.currentNavItem = 'main';
+    $scope.path = "/libs/material-design-icons-3.0.1/image/1x_web/ic_image_black_36dp.png";
 
     $scope.getLoginStatus = function () {
         FB.getLoginStatus(function (response) {
-            if(response.status != 'connected') {
+            if (response.status != 'connected') {
                 $scope.logintoFB(response);
+            }
+            else {
+                $scope.userPic();
             }
         });
     }
@@ -24,11 +28,33 @@ app.controller("homepageCtrl", ['$scope', function ($scope) {
 
     $scope.logoutFB = function () {
         FB.logout(function (response) {
-          // Logged out
+            // Logged out
         });
+    }
+
+    $scope.me = function () {
+        FB.api(
+            "/me",
+            function (response) {
+                if (response && !response.error) {
+                    console.log(response);
+                }
+            }
+        );
+    };
+
+    $scope.userPic = function() {
+        FB.api(
+            "/me/picture",
+            function (response) {
+                if (response && !response.error) {
+                    $scope.path = response.data.url;
+                }
+            }
+        );
     }
 
     setTimeout(function () {
         $scope.getLoginStatus();
-    }, 100);
+    }, 250);
 }])
