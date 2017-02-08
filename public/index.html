@@ -12,19 +12,29 @@
 
         <!-- BWL App -->
         <script src="/javascripts/app.js"></script>
+        <script src="/javascripts/index.js"></script>
         <script src="/views/homepage/ctrl.js"></script>
 
         <!-- BWL stylesheets -->
         <link rel="stylesheet" href="/stylesheets/main.css">
         <title>Building With Love</title>
     </head>
-    <body ng-controller='homepageCtrl' ng-cloak>
-       <md-content>
-            <md-nav-bar md-selected-nav-item='currentNavItem' nav-bar-aria-label='navigation links'>
-                <md-nav-item md-nav-href="#/" name="main">Main</md-nav-item>
-            </md-nav-bar>
-        </md-content>
+    <body ng-controller='mainCtrl' ng-cloak>
         <div class="main-content">
+
+            <!-- Navbar -->
+            <div class="main-navbar">
+                <div class="logo">
+                    <img src="images/bwl-logo.png" id="logo" />
+                </div>
+
+                <ul class="links">
+                    <li ng-repeat="item in mainMenu">
+                        <a href="#/{{item.link}}">{{item.description}}</a>
+                    </li>
+                </ul>
+            </div>
+
             <div ng-view></div>
         </div>
     </body>
