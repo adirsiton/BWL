@@ -1,6 +1,5 @@
 app.controller("homepageCtrl", ['$scope', function ($scope) {
     $scope.currentNavItem = 'main';
-    $scope.path = "/libs/material-design-icons-3.0.1/image/1x_web/ic_image_black_36dp.png";
 
     $scope.getLoginStatus = function () {
         FB.getLoginStatus(function (response) {
@@ -11,6 +10,10 @@ app.controller("homepageCtrl", ['$scope', function ($scope) {
                 $scope.userPic();
             }
         });
+    }
+
+    $scope.setUserImage = function(path) {
+        document.getElementById("userPic").src = path;
     }
 
     $scope.logintoFB = function () {
@@ -48,7 +51,7 @@ app.controller("homepageCtrl", ['$scope', function ($scope) {
             "/me/picture",
             function (response) {
                 if (response && !response.error) {
-                    $scope.path = response.data.url;
+                    $scope.setUserImage(response.data.url);
                 }
             }
         );
