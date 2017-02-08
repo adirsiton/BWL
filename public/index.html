@@ -20,12 +20,11 @@
         <title>Building With Love</title>
     </head>
     <body ng-controller='mainCtrl' ng-cloak>
-        <div class="main-content">
-
-            <!-- Navbar -->
-            <div class="main-navbar">
+        <!-- Navbar -->
+        <div class="main-navbar">
+            <div class="body">
                 <div class="logo">
-                    <img src="images/bwl-logo.png" id="logo" />
+                    <img src="images/bwl-logo-2.png" id="logo" />
                 </div>
 
                 <ul class="links">
@@ -33,7 +32,9 @@
                         <a href="#/{{item.link}}">{{item.description}}</a>
                     </li>
                 </ul>
-            </div>
+            </div>    
+        </div>    
+        <div class="main-content">
 
             <div ng-view></div>
         </div>
