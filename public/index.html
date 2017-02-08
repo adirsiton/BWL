@@ -1,5 +1,4 @@
 <html ng-app="bwl">
-
 <head>
     <!-- Libraries JS -->
     <script src='/libs/angular/angular.min.js'></script>
@@ -26,22 +25,24 @@
 
 <body ng-controller='mainCtrl' ng-cloak>
     <div class="main-content">
-
+    <body ng-controller='mainCtrl' ng-cloak>
         <!-- Navbar -->
         <div class="main-navbar">
-            <div class="logo">
-                <img src="images/bwl-logo.png" id="logo" />
-            </div>
+            <div class="body">
+                <div class="logo">
+                    <img src="images/bwl-logo-2.png" id="logo" />
+                </div>
 
-            <ul class="links">
-                <li ng-repeat="item in mainMenu">
-                    <a href="#/{{item.link}}">{{item.description}}</a>
-                </li>
-            </ul>
+                <ul class="links">
+                    <li ng-repeat="item in mainMenu.items" ng-click="mainMenu.redirect(item.link)">
+                        <a>{{item.description}}</a>
+                    </li>
+                </ul>
+            </div>    
+        </div>    
+        <div class="main-content">
+             <div ng-view></div>
         </div>
-        <div class="fb-like" data-share="true" data-width="450" data-show-faces="true">
-        </div>
-        <div ng-view></div>
     </div>
 </body>
 
