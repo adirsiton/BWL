@@ -7,6 +7,8 @@
         <script src='/libs/angular-aria/angular-aria.min.js'></script>
         <script src='/libs/angular-material/angular-material.min.js'></script>
         <script src="/libs/lodash/lodash.js"></script>
+        <script src='libs\jquery\dist\jquery.min.js'></script>
+        <script src='libs\sweetalert2\dist\sweetalert2.min.js'></script>        
 
         <!-- Libraries CSS -->
         <link rel='stylesheet' href='/libs/angular-material/angular-material.min.css'>
@@ -20,26 +22,49 @@
         <link rel="stylesheet" href="/stylesheets/main.css">
         <title>Building With Love</title>
     </head>
+
     <body ng-controller='mainCtrl' ng-cloak>
-        <!-- Navbar -->
-        <div class="main-navbar">
-            <div class="body">
-                <div class="logo">
-                    <img src="images/bwl-logo-2.png" id="logo" />
-                </div>
-
-                <ul class="links">
-                    <li ng-repeat="item in mainMenu.items" 
-                        ng-click="mainMenu.redirect(item)"
-                        ng-class="{'selected': item.selected}">
-                        <a>{{item.description}}</a>
-                    </li>
-                </ul>
-            </div>    
-        </div>    
         <div class="main-content">
+        <body ng-controller='mainCtrl' ng-cloak>
+            <!-- Navbar -->
+            <div class="main-navbar">
+                <div class="body">
+                    <div class="logo">
+                        <img src="images/bwl-logo-2.png" id="logo" />
+                    </div>
 
-            <div ng-view></div>
+                    <ul class="links">
+                        <li ng-repeat="item in mainMenu.items" 
+                            ng-click="mainMenu.redirect(item)"
+                            ng-class="{'selected': item.selected}">
+                            <a>{{item.description}}</a>
+                        </li>
+                    </ul>
+                </div>    
+            </div>    
+            <div class="main-content">
+                <div ng-view></div>
+            </div>
         </div>
     </body>
+
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '250047138752795',
+                xfbml: true,
+                version: 'v2.8'
+            });
+            FB.AppEvents.logPageView();
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        } (document, 'script', 'facebook-jssdk'));
+    </script>
+
 </html>
