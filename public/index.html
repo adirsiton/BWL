@@ -24,27 +24,23 @@
     </head>
 
     <body ng-controller='mainCtrl' ng-cloak>
-        <div class="main-content">
-        <body ng-controller='mainCtrl' ng-cloak>
-            <!-- Navbar -->
-            <div class="main-navbar">
-                <div class="body">
-                    <div class="logo">
-                        <img src="images/bwl-logo-2.png" id="logo" />
-                    </div>
-
-                    <ul class="links">
-                        <li ng-repeat="item in mainMenu.items" 
-                            ng-click="mainMenu.redirect(item)"
-                            ng-class="{'selected': item.selected}">
-                            <a>{{item.description}}</a>
-                        </li>
-                    </ul>
-                </div>    
+        <!-- Navbar -->
+        <div class="main-navbar">
+            <div class="body">
+                <div class="logo">
+                    <img src="images/bwl-logo-2.png" id="logo" />
+                </div>
+                <ul class="links">
+                    <li ng-repeat="item in mainMenu.items" 
+                        ng-click="mainMenu.redirect(item)"
+                        ng-class="{'selected': item.selected}">
+                        <a>{{item.description}}</a>
+                    </li>
+                </ul>
             </div>    
-            <div class="main-content">
-                <div ng-view></div>
-            </div>
+        </div>    
+        <div class="main-content">
+            <div ng-view></div>
         </div>
     </body>
 
