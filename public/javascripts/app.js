@@ -10,7 +10,8 @@ app.config(function($routeProvider, $mdThemingProvider) {
         template: "works"
     })
     .when("/opinions", {
-        template: "opinions"
+        templateUrl: "/views/opinions/view.html",
+        controller: "opinionsCtrl"
     }).otherwise({
         redirect: '/'
     });
