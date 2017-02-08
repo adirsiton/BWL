@@ -6,6 +6,7 @@
         <script src='/libs/angular-animate/angular-animate.min.js'></script>
         <script src='/libs/angular-aria/angular-aria.min.js'></script>
         <script src='/libs/angular-material/angular-material.min.js'></script>
+        <script src="/libs/lodash/lodash.js"></script>
 
         <!-- Libraries CSS -->
         <link rel='stylesheet' href='/libs/angular-material/angular-material.min.css'>
@@ -28,7 +29,9 @@
                 </div>
 
                 <ul class="links">
-                    <li ng-repeat="item in mainMenu.items" ng-click="mainMenu.redirect(item.link)">
+                    <li ng-repeat="item in mainMenu.items" 
+                        ng-click="mainMenu.redirect(item)"
+                        ng-class="{'selected': item.selected}">
                         <a>{{item.description}}</a>
                     </li>
                 </ul>

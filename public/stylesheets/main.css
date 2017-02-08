@@ -49,11 +49,19 @@ div.main-navbar ul.links li {
   cursor: pointer;
 }
 
+div.main-navbar ul.links li.selected,
 div.main-navbar ul.links li:hover {
   background-color: #809cb9;
   color: #072c52;
+}
+
+div.main-navbar ul.links li:hover {
   animation-name: nav-item-hover;
   animation-duration: 0.5s;
+}
+
+div.main-navbar ul.links li:focus {
+  outline: none;
 }
 
 @keyframes nav-item-hover {
@@ -62,12 +70,8 @@ div.main-navbar ul.links li:hover {
 }
 
 div.main-navbar ul.links li a {
-  text-decoration: none;
+  text-decoration: none!important;
   color: inherit;
   font-family: gisha;
   font-size: 18px;
-}
-
-div.main-navbar ul.links li.selected a {
-  border-bottom: 1px solid black;  
 }
