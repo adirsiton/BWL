@@ -31,4 +31,14 @@ app.controller("homepageCtrl", ['$scope', function ($scope) {
     setTimeout(function () {
         $scope.getLoginStatus();
     }, 100);
+
+    // Listen to latest work image 
+    var latestWorksImgEvents = function() {
+        $(".latest-works img").on("mouseover", function(e) {
+            $(this).siblings(".highlight").addClass("active");
+        }).on("mouseleave", function(e) {
+            $(this).siblings(".highlight").removeClass("active");
+        });
+    };
+    latestWorksImgEvents();
 }])
