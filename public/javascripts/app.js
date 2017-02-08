@@ -5,6 +5,12 @@ app.config(function($routeProvider, $mdThemingProvider) {
     $routeProvider.when("/", {
         templateUrl: '/views/homepage/view.html',
         controller: 'homepageCtrl'
+    })
+    .when("/works", {
+        template: "works"
+    })
+    .when("/opinions", {
+        template: "opinions"
     }).otherwise({
         redirect: '/'
     });

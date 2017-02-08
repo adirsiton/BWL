@@ -17,6 +17,7 @@ div.main-navbar {
   position: fixed;
   top: 0;
   width: 100%;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.5);
 }
 
 div.main-navbar .body {
@@ -37,15 +38,27 @@ div.main-navbar .logo img {
 div.main-navbar ul.links {
   list-style: none;
   flex: 1;
-  margin: 20px 0 0 0;
   width: 80%;
   text-align: left;
 }
 
 div.main-navbar ul.links li {
-  padding: 0;
   display: inline-block;  
-  margin: 0 4% 0 0; 
+  padding: 10px 20px 10px 20px;
+  background-color: inherit;
+  cursor: pointer;
+}
+
+div.main-navbar ul.links li:hover {
+  background-color: #809cb9;
+  color: #072c52;
+  animation-name: nav-item-hover;
+  animation-duration: 0.5s;
+}
+
+@keyframes nav-item-hover {
+  from {background-color: inherit; color: black;}
+  to {background-color: #809cb9; color: #072c52;}
 }
 
 div.main-navbar ul.links li a {
