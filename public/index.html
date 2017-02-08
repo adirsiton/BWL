@@ -1,41 +1,67 @@
 <html ng-app="bwl">
-    <head>
-        <!-- Libraries JS -->
-        <script src='/libs/angular/angular.min.js'></script>
-        <script src='/libs/angular-route/angular-route.min.js'></script>
-        <script src='/libs/angular-animate/angular-animate.min.js'></script>
-        <script src='/libs/angular-aria/angular-aria.min.js'></script>
-        <script src='/libs/angular-material/angular-material.min.js'></script>
 
-        <!-- Libraries CSS -->
-        <link rel='stylesheet' href='/libs/angular-material/angular-material.min.css'>
+<head>
+    <!-- Libraries JS -->
+    <script src='/libs/angular/angular.min.js'></script>
+    <script src='/libs/angular-route/angular-route.min.js'></script>
+    <script src='/libs/angular-animate/angular-animate.min.js'></script>
+    <script src='/libs/angular-aria/angular-aria.min.js'></script>
+    <script src='/libs/angular-material/angular-material.min.js'></script>
+    <script src='libs\jquery\dist\jquery.min.js'></script>
+    <script src='libs\sweetalert2\dist\sweetalert2.min.js'></script>
 
-        <!-- BWL App -->
-        <script src="/javascripts/app.js"></script>
-        <script src="/javascripts/index.js"></script>
-        <script src="/views/homepage/ctrl.js"></script>
+    <!-- Libraries CSS -->
+    <link rel='stylesheet' href='/libs/angular-material/angular-material.min.css'>
+    <link rel='stylesheet' href='/libs/sweetalert2/dist/sweetalert2.min.css'
 
-        <!-- BWL stylesheets -->
-        <link rel="stylesheet" href="/stylesheets/main.css">
-        <title>Building With Love</title>
-    </head>
-    <body ng-controller='mainCtrl' ng-cloak>
-        <div class="main-content">
+    <!-- BWL App -->
+    <script src="/javascripts/app.js"></script>
+    <script src="/javascripts/index.js"></script>
+    <script src="/views/homepage/ctrl.js"></script>
 
-            <!-- Navbar -->
-            <div class="main-navbar">
-                <div class="logo">
-                    <img src="images/bwl-logo.png" id="logo" />
-                </div>
+    <!-- BWL stylesheets -->
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <title>Building With Love</title>
+</head>
 
-                <ul class="links">
-                    <li ng-repeat="item in mainMenu">
-                        <a href="#/{{item.link}}">{{item.description}}</a>
-                    </li>
-                </ul>
+<body ng-controller='mainCtrl' ng-cloak>
+    <div class="main-content">
+
+        <!-- Navbar -->
+        <div class="main-navbar">
+            <div class="logo">
+                <img src="images/bwl-logo.png" id="logo" />
             </div>
 
-            <div ng-view></div>
+            <ul class="links">
+                <li ng-repeat="item in mainMenu">
+                    <a href="#/{{item.link}}">{{item.description}}</a>
+                </li>
+            </ul>
         </div>
-    </body>
+        <div class="fb-like" data-share="true" data-width="450" data-show-faces="true">
+        </div>
+        <div ng-view></div>
+    </div>
+</body>
+
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '250047138752795',
+            xfbml: true,
+            version: 'v2.8'
+        });
+        FB.AppEvents.logPageView();
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    } (document, 'script', 'facebook-jssdk'));
+</script>
+
 </html>
