@@ -1,8 +1,14 @@
-        <md-card>
-            <md-card-title>
-                <md-card-title-text>
-                <span class="md-headline">Hello world</span>
-                </md-card-title-text>
-            </md-card-title>
-            <md-card-content>Lorem ipsum</md-card-content>
-        </md-card>
+<link rel="stylesheet" href="/views/homepage/style.css">
+
+<div layout="row" class="zero">
+    <md-card flex="60" class="latest-works">
+        
+        <img ng-src="api/gallery/1.jpg" />
+        <div class="highlight">
+            <div class="title">That's our latest work</div>
+        </div>
+    </md-card>
+    <md-card flex="40">
+        <md-card-content>123</md-card-content>
+    </md-card>
+</div>
