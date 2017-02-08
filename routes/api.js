@@ -1,18 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
-var api = require('./api');
+var apiWorks = require('./api/works');
+var apiOpinions = require('./api/opinions');
+var apiUsers = require('./api/users');
 
-router.get('/users', function(req, res, next) {
-  router.use(api.users);
-});
+router.use('/works', apiWorks);
 
-router.get('/opinions', function(req, res, next) {
-  router.use(api.opinions);
-});
+router.use('/opinions', apiOpinions);
 
-router.get('/works', function(req, res, next) {
-  router.use(api.works);
-});
+router.use('/works', apiUsers);
 
 module.exports = router;

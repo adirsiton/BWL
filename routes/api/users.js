@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-var api = require('./api');
 var userDB = require('../../controllers/DAL/users.db');
 
 router.get('/fbId/:fbId', function(req, res, next) {

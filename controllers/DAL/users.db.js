@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var models = require('../../models/users');
 var ObjectId = mongoose.Types.ObjectId;
 
-var userModel = mongoose.model('works', models.users.user);
+var userModel = mongoose.model('works', models.user);
 
 module.exports.getUserById = (workid, callback) => {
     userModel.findById(workid, callback);

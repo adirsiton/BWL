@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
-var models = require('../../models/users');
+var models = require('../../models/opinions');
 var ObjectId = mongoose.Types.ObjectId;
 
-var opinionModel = mongoose.model('opinions', models.opinions.opinion);
+var opinionModel = mongoose.model('opinions', models.opinion);
 
 module.exports.getAllOpinions = (callback) => {
     opinionModel.find({}, callback);

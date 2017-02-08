@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-var api = require('./api');
+var opinionDB = require('../../controllers/DAL/opinions.db');
 
-router.get('/all/', function(req, res, next) {
-    userDB.getAllOpinions(function(err, data) {
+router.get('/', function(req, res, next) {
+    opinionDB.getAllOpinions(function(err, data) {
         if(err) {
             console.log(err);
             res.status(404).send('Cannot get opinions');
@@ -16,7 +16,7 @@ router.get('/all/', function(req, res, next) {
 });
 
 router.get('/:userfbId', function(req, res, next) {
-    userDB.getUserOpinions(req.params.userfbId, function(err, data) {
+    opinionDB.getUserOpinions(req.params.userfbId, function(err, data) {
         if(err) {
             console.log(err);
             res.status(404).send('Cannot get user opinions');
@@ -28,7 +28,7 @@ router.get('/:userfbId', function(req, res, next) {
 });
 
 router.get('/update', function(req, res, next) {
-    userDB.updateOpinion(req.body.updatedOpinion, function(err, data) {
+    opinionDB.updateOpinion(req.body.updatedOpinion, function(err, data) {
         if(err) {
             console.log(err);
             res.status(404).send('Cannot update opinion');
@@ -40,7 +40,7 @@ router.get('/update', function(req, res, next) {
 });
 
 router.get('/add', function(req, res, next) {
-    userDB.addOpinion(req.body.newOpinion, function(err, data) {
+    opinionDB.addOpinion(req.body.newOpinion, function(err, data) {
         if(err) {
             console.log(err);
             res.status(404).send('Cannot add new opinion');

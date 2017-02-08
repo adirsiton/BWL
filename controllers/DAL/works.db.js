@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var models = require('../../models/works');
 var ObjectId = mongoose.Types.ObjectId;
 
-var workModel = mongoose.model('works', models.works.work);
+var workModel = mongoose.model('works', models.work);
 
 
 module.exports.getAllWorks = (callback) => {
