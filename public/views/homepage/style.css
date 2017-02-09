@@ -1,0 +1,64 @@
+.latest-works {
+    width: 60%;
+    position: relative;
+}
+
+.latest-works .highlight {
+    background: #fff;
+    opacity: 0.8;
+    position: absolute;
+    padding: 10px;
+    color: #000;
+    width: 60%;
+    margin: 20%;
+    z-index: 990;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.latest-works .highlight.active {
+    visibility: visible;
+    animation-name: highlight-activation;
+    animation-duration: 1s;
+}
+
+.latest-works .highlight.leave {
+    animation-name: highlight-leave;
+    animation-duration: 1s;
+    visibility: hidden;
+}
+
+@keyframes highlight-activation {
+  from {opacity: 0;}
+  to {opacity: 0.7;}
+}
+
+@keyframes highlight-leave {
+  from {opacity: 0.7;}
+  to {opacity: 0;}
+}
+
+.latest-works .highlight .title {
+    color: #072c52;
+}
+
+.latest-works img {
+    max-width: 100%;
+    height: auto;
+}
+
+.latest-works img:hover {
+    -webkit-filter: blur(5px);
+    animation-name: latest-works-img-hover;
+    animation-duration: 1s;
+}
+
+.latest-works img.leave {
+    animation-name: latest-works-img-hover;
+    animation-duration: 1s;
+    animation-direction: reverse;
+}
+
+@keyframes latest-works-img-hover {
+  from {-webkit-filter: none;}
+  to {-webkit-filter: blur(5px);}
+}
