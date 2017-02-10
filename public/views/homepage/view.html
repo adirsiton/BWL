@@ -1,14 +1,20 @@
 <link rel="stylesheet" href="/views/homepage/style.css">
 
 <div layout="row" class="zero">
-    <md-card flex="60" class="latest-works">
+    <md-card flex="70" class="latest-works">
         
         <img ng-src="api/gallery/1.jpg" />
         <div class="highlight">
             <div class="title">That's our latest work</div>
         </div>
     </md-card>
-    <md-card flex="40">
-        <md-card-content>123</md-card-content>
-    </md-card>
+    <div flex="30" layout="column">
+        <md-card flex="70">
+            <md-card-content>123</md-card-content>
+        </md-card>
+        <md-card flex="30">
+            <md-card-title>Contact</md-card-title>
+            <md-card-content>This is a phone number</md-card-content>
+        </md-card>
+    </div>
 </div>
