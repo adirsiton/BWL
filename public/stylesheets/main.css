@@ -6,9 +6,8 @@ body {
 }
 
 body > div.main-content {
-  width: 96%;
   margin: 0 auto;
-  margin-top: 90px;
+  margin-top: 70px;
 }
 
 div.main-navbar {

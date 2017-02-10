@@ -1,6 +1,6 @@
 .latest-works {
-    width: 100%;
     position: relative;
+    background-image: url('/images/backgrounds/9.jpg');
 }
 
 .latest-works .highlight {
@@ -42,7 +42,8 @@
 }
 
 .latest-works img {
-    max-width: 100%;
+    /*max-width: 100%;
+    height: 100%;*/
     height: auto;
 }
 
@@ -61,4 +62,18 @@
 @keyframes latest-works-img-hover {
   from {-webkit-filter: none;}
   to {-webkit-filter: blur(5px);}
+}
+
+.homepage-container {
+    background-image: url('/images/backgrounds/12.jpg');
+    background-position: center;
+    background-size: 100% 100%;
+    height: 100%; 
+}
+
+.homepage-container .content {
+    margin: 5% 3%;
+    width: 60%;
+    height: 40%;
+    opacity: 0.89;
 }
