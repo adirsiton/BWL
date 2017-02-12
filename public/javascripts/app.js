@@ -1,4 +1,4 @@
-var app = angular.module('bwl', ['ngRoute', 'ngMaterial']);
+var app = angular.module('bwl', ['ngRoute', 'ngMaterial', 'bwlServices']);
 
 // Routing
 app.config(function($routeProvider, $mdThemingProvider) {
@@ -7,7 +7,8 @@ app.config(function($routeProvider, $mdThemingProvider) {
         controller: 'homepageCtrl'
     })
     .when("/works", {
-        template: "works"
+        templateUrl: "/views/works/view.html",
+        controller: 'worksCtrl'
     })
     .when("/opinions", {
         templateUrl: "/views/opinions/view.html",

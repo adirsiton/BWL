@@ -3,6 +3,14 @@ var router = express.Router();
 
 var workDB = require('../../controllers/DAL/works.db');
 
+// var fixPicPaths = function(work) {
+//     // Run over the work's pictures
+//     for (var picIndex = 0; picIndex < work.pictures.length; picIndex++) {
+//         // Fix to real path
+//         work.pictures[picIndex].picPath = "/" + work.title + "/" + work.pictures[picIndex].picPath;
+//     }
+// }
+
 router.get('/', function(req, res, next) {
     workDB.getAllWorks(function(err, data) {
         if(err) {
@@ -10,6 +18,9 @@ router.get('/', function(req, res, next) {
             res.status(404).send('Cannot get all works');
         }
         else {
+            // Fix picture paths
+            //data.forEach(fixPicPaths);
+
             res.send(data);
         }
     })

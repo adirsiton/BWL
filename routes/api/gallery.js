@@ -6,13 +6,14 @@ router.get("/", function(req, res, next) {
     res.send("123");
 })
 
-router.get('/:imageName', function(req, res, next) {
+router.get('/:workName/:imageName', function(req, res, next) {
     var imageName = req.params.imageName;
+    var workName = req.params.workName;
 
     var appDirPath = path.dirname(path.dirname(process.mainModule.filename));
 
     // Find the file and return it
-    res.sendFile(path.join(appDirPath, "gallery", imageName));
+    res.sendFile(path.join(appDirPath, "gallery", workName, imageName));
 })
 
 module.exports = router;
