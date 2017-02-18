@@ -5,6 +5,10 @@ body {
   width: 100%;
 }
 
+i.material-icons {
+  font-size: 36px;
+}
+
 body > div.main-content {
   margin: 0 auto;
   margin-top: 70px;

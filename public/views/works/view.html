@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/views/works/style.css" />
 
-<div id="works-page" layout="row">
-    <md-card class="work" flex="25" ng-repeat="work in works">
+<!--<div id="works-page" layout="column" layout-gt-sm="row">
+    <!--<md-card class="work" flex="25" ng-repeat="work in works">
         <img ng-src="/api/gallery/{{work.title}}/{{work.pictures[0].picPath}}" class="md-card-image">
         <md-card-title>
             <md-card-title-text>
@@ -11,5 +11,13 @@
         <md-card-content>
             {{work.description}}
         </md-card-content>
-    </md-card>
+    </md-card>->
+    <work-card ng-repeat="work in works" work="work" 
+               flex="100" flex-gt-sm="none"
+               style="min-width:32%!important"></work-card>
+</div>-->
+
+<div id="works-page">
+    <work-card ng-repeat="work in works" work="work"
+               style="min-width: 32%; max-width: 32%; display: inline-block"></work-card>
 </div>

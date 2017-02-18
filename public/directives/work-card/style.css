@@ -1,0 +1,25 @@
+.work {
+    position: relative;
+}
+
+.work .highlight {
+    opacity: 0;
+    background: #111;
+    position: absolute;
+    width: 80%;
+    height: 70%;
+    color: #ddd;
+    text-align: center;
+    padding: 10%; 
+    transition: opacity ease-in 200ms;
+}
+
+.work .highlight .headline {
+    font-size: 36px;
+    text-align: center;
+}
+
+.work:hover .highlight {
+    display: block;
+    opacity: 0.78;
+}

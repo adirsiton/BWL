@@ -1,7 +1,7 @@
-var app = angular.module('bwl', ['ngRoute', 'ngMaterial', 'bwlServices']);
+var app = angular.module('bwl', ['ngRoute', 'ngMaterial', 'bwlServices', 'directives', 'wu.masonry']);
 
 // Routing
-app.config(function($routeProvider, $mdThemingProvider) {
+app.config(function($routeProvider, $mdThemingProvider, $mdIconProvider) {
     $routeProvider.when("/", {
         templateUrl: '/views/homepage/view.html',
         controller: 'homepageCtrl'
@@ -22,4 +22,8 @@ app.config(function($routeProvider, $mdThemingProvider) {
         .accentPalette('blue')
         .warnPalette('red');
     $mdThemingProvider.setDefaultTheme('myAwesome');
+
+    $mdIconProvider
+        .iconSet("md", "/libs/material-design-icons-3.0.1/social/svg/production", 36)
+        .defaultIconSet("/libs/material-design-icons-3.0.1/social/svg/production", 36);
 });
