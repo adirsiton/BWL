@@ -1,7 +1,8 @@
 directives.directive("workCard", function() {
     return {
         scope: {
-            work: '='
+            work: '=',
+            onClick: '&'
         },
         templateUrl: '/directives/work-card/template.html'  
     }

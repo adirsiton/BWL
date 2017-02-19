@@ -1,4 +1,4 @@
-app.controller("worksCtrl", ['$scope', 'worksApi', function($scope, worksApi) {
+app.controller("worksCtrl", ['$scope', '$location', 'worksApi', function($scope, $location, worksApi) {
     $scope.works = [];
 
     $scope.fetchWorks = function() {
@@ -10,4 +10,8 @@ app.controller("worksCtrl", ['$scope', 'worksApi', function($scope, worksApi) {
         });
     }
     $scope.fetchWorks();
+
+    $scope.workClick = function(work) {
+        $location.path("/works/" + work.name);
+    }
 }]);
