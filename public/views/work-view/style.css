@@ -1,0 +1,12 @@
+#view {
+    margin: 80px 15% 0 15%;
+}
+
+#gallery {
+    text-align: center;
+}
+
+#gallery .masonry-brick {
+    margin: 3px;
+    max-width: 200px;
+}

@@ -11,7 +11,8 @@ app.config(function($routeProvider, $mdThemingProvider, $mdIconProvider) {
         controller: 'worksCtrl'
     })
     .when("/works/:name", {
-        templateUrl: "/views/work-view/view.html"
+        templateUrl: "/views/work-view/view.html",
+        controller: 'workViewCtrl'
     })
     .when("/opinions", {
         templateUrl: "/views/opinions/view.html",

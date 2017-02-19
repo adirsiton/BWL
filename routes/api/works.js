@@ -26,8 +26,8 @@ router.get('/', function(req, res, next) {
     })
 });
 
-router.get('/:workId', function(req, res, next) {
-    workDB.getAllWorks(req.params.workId, function(err, data) {
+router.get('/:workName', function(req, res, next) {
+    workDB.getWorkByName(req.params.workName, function(err, data) {
         if(err) {
             console.log(err);
             res.status(404).send('Cannot get work');

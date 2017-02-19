@@ -1,3 +1,13 @@
 <link rel="stylesheet" href="/views/work-view/style.css">
 
+<div id="view">
 Single work page
+
+    <div id="gallery" masonry>
+        <img class="masonry-brick" 
+            ng-repeat="image in work.pictures" 
+            ng-src="/api/gallery/{{work.title}}/{{image.picPath}}"
+            style="height: {{image.height}}px">
+            <!--<img class="repeated-img masonry-brick" ng-repeat="image in images" ng-src="http://placehold.it/225x{{image.height}}/{{image.color.bg}}/{{image.color.text}}&text={{image.num}}" />-->
+    </div>
+</div>

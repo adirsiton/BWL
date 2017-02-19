@@ -12,6 +12,6 @@ app.controller("worksCtrl", ['$scope', '$location', 'worksApi', function($scope,
     $scope.fetchWorks();
 
     $scope.workClick = function(work) {
-        $location.path("/works/" + work.name);
+        $location.path("/works/" + work.title);
     }
 }]);

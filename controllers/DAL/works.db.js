@@ -13,6 +13,10 @@ module.exports.getWorkById = (workid, callback) => {
     workModel.findById(workid, callback);
 };
 
+module.exports.getWorkByName = (workname, callback) => {
+    workModel.findOne({'title': workname}, callback);
+};
+
 module.exports.addWork = (newWork, callback) => {
     var newWorkObj = new workModel(newWork);
     newWorkObj.save(callback);
