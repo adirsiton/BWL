@@ -20,7 +20,23 @@ app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', function($sco
         })
     }
 
-    var heights = [200, 225, 150, 140, 240, 310, 330, 260]
+    var heights = [200, 225, 150, 135, 240, 310, 260, 290, 180]
 
     $scope.$on('$routeChangeSuccess', $scope.init);
+
+    $scope.actions = [{
+        desc: "ערוך",
+        iconName: "edit",
+        bgcolor: 'rgb(41,98,255)',
+        func: function() {
+            alert("editing this work");
+        }
+    }, {
+        desc: "מחק",
+        iconName: "close",
+        bgcolor: "rgb(213,0,0)",
+        func: function() {
+            alert("deleted");
+        }
+    }]
 }]);

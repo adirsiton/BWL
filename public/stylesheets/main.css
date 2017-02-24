@@ -9,6 +9,10 @@ i.material-icons {
   font-size: 36px;
 }
 
+.md-mini i.material-icons {
+  font-size:24px;
+}
+
 body > div.main-content {
   margin: 0 auto;
   margin-top: 70px;
