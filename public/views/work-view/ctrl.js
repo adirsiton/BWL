@@ -15,12 +15,11 @@ app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', function($sco
                 pic.height = 0.7 * heights[Math.floor(Math.random()*heights.length)];
             })
         }, function(res) {
-            // TODO: swal
-            alert(res.data);
+            swal("שגיאה", "תקלה בעת קבלת הנתונים: " + res.data, "error");
         })
     }
 
-    var heights = [200, 225, 150, 135, 240, 310, 260, 290, 180]
+    var heights = [200, 225, 150, 160, 240, 310, 260, 250, 180]
 
     $scope.$on('$routeChangeSuccess', $scope.init);
 
@@ -36,7 +35,18 @@ app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', function($sco
         iconName: "close",
         bgcolor: "rgb(213,0,0)",
         func: function() {
-            alert("deleted");
+            swal({
+                title: "האם אתה בטוח?",
+                text: "אם תמחק את העבודה לא תוכל לשחזר את הנתונים",
+                type: "warning",
+                showCancelButton: true,
+                closeOnConfirm: true,
+                closeOnCancel: true
+            }, function(confirmed) {
+                if (confirmed) {
+                    swal("העבודה נמחקה בהצלחה!", "אתה מועבר עכשיו לדף הבית", "success");
+                }
+            })
         }
     }]
 }]);

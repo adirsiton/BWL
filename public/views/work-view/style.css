@@ -8,5 +8,6 @@
 
 #gallery .masonry-brick {
     margin: 3px;
-    max-width: 210px;
+    min-width: 215px;
+    max-width: 215px;
 }
