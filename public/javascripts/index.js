@@ -1,26 +1,29 @@
-app.controller("mainCtrl", ['$rootScope', '$scope', '$location', function ($rootScope, $scope, $location) {
-    $scope.userPicPath  = '';
+app.controller("mainCtrl", ['$rootScope', '$scope', '$location','$route', function ($rootScope, $scope, $location, $route) {
+    $scope.userPicPath = '';
+    $scope.loggedStatus = 'Login';
+    $scope.loggedIn = false;
     
     $scope.getLoginStatus = function () {
         FB.getLoginStatus(function (response) {
-            if (response.status != 'connected') {
-                $scope.logintoFB(response);
-            }
-            else {
+            if (response.status == 'connected') {
+                $scope.loggedIn = true;
+                $scope.loggedStatus = 'Logout';
                 $scope.userPic();
             }
+            else {
+                $scope.loggedIn = false;
+                $scope.loggedStatus = 'Login';
+            }
         });
-    }
-
-    $scope.setUserImage = function (path) {
-        $scope.userPicPath = path;
-        //document.getElementById("userPic").src = path;
     }
 
     $scope.logintoFB = function () {
         FB.login(function (response) {
             if (response.status === 'connected') {
-                // Logged into your app and Facebook.
+                $scope.userPic();
+                $scope.loggedIn = !$scope.loggedIn;
+                $scope.loggedStatus = 'Logout';
+                $route.realod();
             } else if (response.status === 'not_authorized') {
                 // The person is logged into Facebook, but not your app.
             } else {
@@ -32,7 +35,9 @@ app.controller("mainCtrl", ['$rootScope', '$scope', '$location', function ($root
 
     $scope.logoutFB = function () {
         FB.logout(function (response) {
-            // Logged out
+            $scope.loggedIn = !$scope.loggedIn;
+            $scope.loggedStatus = 'Logoin';
+            $route.realod();
         });
     }
 
@@ -49,10 +54,10 @@ app.controller("mainCtrl", ['$rootScope', '$scope', '$location', function ($root
 
     $scope.userPic = function () {
         FB.api(
-            "/me/picture",
+            "/me/picture?width=56&height=56",
             function (response) {
                 if (response && !response.error) {
-                    $scope.setUserImage(response.data.url);
+                    $scope.userPicPath = response.data.url;
                 }
             }
         );

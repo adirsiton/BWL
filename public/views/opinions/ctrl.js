@@ -1,8 +1,8 @@
 app.controller("opinionsCtrl", ['$scope', function ($scope) {
 
-    if($scope.$parent.userPicPath == '') {
-        $scope.$parent.getLoginStatus();
-    }
+    //if($scope.$parent.userPicPath == '') {
+        //$scope.$parent.getLoginStatus();
+    //}
     var imagePath = $scope.$parent.userPicPath;
 
     $scope.todos = [

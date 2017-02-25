@@ -8,15 +8,15 @@
     <script src="/libs/desandro-matches-selector/matches-selector.js"></script>
     <script src="/libs/fizzy-ui-utils/utils.js"></script>
     <script src="/libs/outlayer/item.js"></script>
-    <script src="/libs/angular-masonry/masonry.pkgd.min.js"></script>  
-    <script src='/libs/angular/angular.min.js'></script>    
-    <script src="/libs/angular-masonry/imagesloaded.pkgd.min.js"></script>           
+    <script src="/libs/angular-masonry/masonry.pkgd.min.js"></script>
+    <script src='/libs/angular/angular.min.js'></script>
+    <script src="/libs/angular-masonry/imagesloaded.pkgd.min.js"></script>
     <script src='/libs/angular-route/angular-route.min.js'></script>
     <script src='/libs/angular-animate/angular-animate.min.js'></script>
     <script src='/libs/angular-aria/angular-aria.min.js'></script>
     <script src='/libs/angular-material/angular-material.min.js'></script>
-    <script src="/libs/lodash/lodash.js"></script>  
-    <script src="/libs/angular-masonry/angular-masonry.js"></script> 
+    <script src="/libs/lodash/lodash.js"></script>
+    <script src="/libs/angular-masonry/angular-masonry.js"></script>
     <script src='/libs/sweetalert/sweetalert.min.js'></script>
 
     <!-- Libraries CSS -->
@@ -58,6 +58,15 @@
                 <li ng-repeat="item in mainMenu.items" ng-click="mainMenu.redirect(item)" ng-class="{'selected': item.selected}">
                     <a>{{item.description}}</a>
                 </li>
+                <span>
+                     <md-button id='profile-pic' class='md-fab fade' aria-label="Profile" ng-click='logoutFB()' ng-show="loggedIn">
+                        <img ng-src="{{userPicPath}}">
+                    </md-button>
+                    <md-button id='facebook-btn' class="md-fab fade" aria-label="Facebook" ng-click='logintoFB()' ng-show="!loggedIn">
+                        <md-icon md-svg-src="images/facebook-app-symbol.svg"></md-icon>
+                    </md-button>
+                    <md-tooltip md-direction="bottom">{{loggedIn ? 'Logout' : 'Login'}}</md-tooltip>
+                </span>
             </ul>
         </div>
     </div>
@@ -68,22 +77,22 @@
 </body>
 
 <script>
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: '250047138752795',
-                xfbml: true,
-                version: 'v2.8'
-            });
-            FB.AppEvents.logPageView();
-        };
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '250047138752795',
+            xfbml: true,
+            version: 'v2.8'
+        });
+        FB.AppEvents.logPageView();
+    };
 
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) { return; }
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        } (document, 'script', 'facebook-jssdk'));
-    </script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    } (document, 'script', 'facebook-jssdk'));
+</script>
 
 </html>
