@@ -1,8 +1,17 @@
-app.controller("opinionsCtrl", ['$scope', '$rootScope', 'facebookApi', function ($scope, $rootScope, facebookApi) {
+app.controller("opinionsCtrl", ['$scope', '$rootScope', 'facebookApi', '$mdDialog', function ($scope, $rootScope, facebookApi, $mdDialog) {
+
+  $scope.newOpinionDialog = function (e) {
+    $mdDialog.show({
+      templateUrl: '/views/works/new-opinion/dialog.html',
+      targetEvent: e,
+      clickOutsideToClose: true
+    })
+  }
+
   var imagePath = $rootScope.smallUserPicPath;
   $scope.me = null;
 
-  facebookApi.normalProfilePic().then(function(response) {
+  facebookApi.normalProfilePic().then(function (response) {
     $scope.normalSizePic = response.data.url;
   })
 
@@ -56,7 +65,7 @@ app.controller("opinionsCtrl", ['$scope', '$rootScope', 'facebookApi', function 
   }*/
 
   $scope.logIn = () => {
-    
+
   }
 
   $scope.opinions = [

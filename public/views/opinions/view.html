@@ -1,6 +1,10 @@
 <link rel='stylesheet' href='views/opinions/style.css'>
 <script src='javascripts/facebookSDK.js'></script>
 
+<md-button class="md-fab md-hue-2" id="add" ng-click="newOpinionDialog($event)">
+    <i class="material-icons">add</i>
+</md-button>
+
 <md-content>
     <div layout="row">
         <md-card md-theme-watch ng-repeat='opinion in opinions'>
