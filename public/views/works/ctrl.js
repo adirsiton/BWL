@@ -1,4 +1,5 @@
-app.controller("worksCtrl", ['$scope', '$location', 'worksApi', function($scope, $location, worksApi) {
+app.controller("worksCtrl", ['$scope', '$location', '$mdDialog', 'worksApi', 
+                             function($scope, $location, $mdDialog, worksApi) {
     $scope.works = [];
 
     $scope.fetchWorks = function() {
@@ -13,5 +14,13 @@ app.controller("worksCtrl", ['$scope', '$location', 'worksApi', function($scope,
 
     $scope.workClick = function(work) {
         $location.path("/works/" + work.title);
+    }
+
+    $scope.newWorkDialog = function(e) {
+        $mdDialog.show({
+            templateUrl: '/views/works/new-work/dialog.html',
+            targetEvent: e,
+            clickOutsideToClose: true
+        })
     }
 }]);
