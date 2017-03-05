@@ -1,5 +1,6 @@
-app.controller("newWorkCtrl",['$scope','$mdDialog', function($scope, $mdDialog) {
-    $scope.cancel = function() {
-        $mdDialog.cancel();
+
+app.controller("newWorkCtrl", function($scope, $mdDialog) {
+    $scope.hide = function() {
+        $mdDialog.hide();
     }
-}]);
+});

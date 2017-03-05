@@ -1,4 +1,6 @@
 services.service('facebookApi', ['$rootScope', function ($rootScope) {
+    var self = this;
+
     this.getLoginStatus = function () {
         return new Promise(function (resolve, reject) {
             FB.getLoginStatus(function (response) {
@@ -62,25 +64,29 @@ services.service('facebookApi', ['$rootScope', function ($rootScope) {
         })
     }
 
-    this.checkUserDataStatus = (isNormalPic) => {
-        // Checking if the user has already gotten the small user pic
-        if (!$rootScope.smallUserPicPath) {
-            this.userPic5656().then(function (response) {
-                $rootScope.smallUserPicPath = response.data.url;
-            })
-        }
+    this.checkUserDataStatus = function (isNormalPic) {
+        return new Promise(function (resolve, reject, funcs) {
+            // Checking if the user has already gotten the small user pic
+            if (!$rootScope.smallUserPicPath) {
+                self.userPic5656().then(function (response) {
+                    $rootScope.smallUserPicPath = response.data.url;
 
-        // Checking if the user asked for a normal profile pic
-        if (isNormalPic && !$rootScope.normalProfilePicPath) {
-            this.normalProfilePic().then(function (response) {
-                $rootScope.normalProfilePicPath = response.data.url;
-            });
-        }
+                    // Checking if the user asked for a normal profile pic
+                    if (isNormalPic && !$rootScope.normalProfilePicPath) {
+                        self.normalProfilePic().then(function (response) {
+                            $rootScope.normalProfilePicPath = response.data.url;
 
-        if(!$rootScope.me) {
-            this.me().then(function(response) {
-                $rootScope.me = response.data;
-            });
-        }
+                            if (!$rootScope.me) {
+                                self.me().then(function (response) {
+                                    $rootScope.me = response.data;
+
+                                    resolve(true);
+                                })
+                            }
+                        })
+                    }
+                })
+            }
+        })
     }
 }]);
