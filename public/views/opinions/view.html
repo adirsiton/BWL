@@ -1,48 +1,23 @@
 <link rel='stylesheet' href='views/opinions/style.css'>
 <script src='javascripts/facebookSDK.js'></script>
 
+<md-button class="md-fab md-hue-2" id="add" ng-click="newOpinionDialog($event)">
+    <i class="material-icons">add</i>
+</md-button>
+
 <md-content>
     <div layout="row">
-        <div flex='20'>
-            <md-card id='profile-card'>
-                <md-toolbar layot='row' class='md-hue-3'>
-                    <div class="md-toolbar-tools">
-                        <span>משתשמש Facebook</span>
-                    </div>
-                </md-toolbar>
-                <img id='profile-picture' src='libs/material-design-icons-3.0.1/action/2x_web/ic_face_black_36dp.png'>
-                <h2>{{me.name}}</h2>
-            </md-card>
-        </div> 
-        <div flex "100">
-            <md-card>
-                <md-toolbar layout="row" class="md-hue-3">
-                    <div class="md-toolbar-tools">
-                        <span>חוות דעת</span>
-                    </div>
-                    <md-button layout='center-start' class='md-icon-button' aria-label='הוספה'>
-                        <i class="material-icons">add</i>
-                    </md-button>
-                </md-toolbar>   
-                <md-list flex>
-                    <md-list-item class="md-3-line" ng-repeat="item in todos" ng-click="null">
-                        <img ng-src="{{item.face}}" class="md-avatar" style='margin-left: 5px;' />
-                        <div class="md-list-item-text" layout="column">
-                            <h3 layout='center-end'>{{ item.who }}</h3>
-                            <h4 layout='center-end'>{{ item.what }}</h4>
-                            <p layout='center-end'>{{ item.notes }}</p>
-                        </div>
-                    </md-list-item>
-                     <md-list-item class="md-3-line" ng-repeat="item in todos" ng-click="null">
-                        <img ng-src="{{item.face}}" class="md-avatar" style='margin-left: 5px;' />
-                        <div class="md-list-item-text" layout="column">
-                            <h3 layout='center-end'>{{ item.who }}</h3>
-                            <h4 layout='center-end'>{{ item.what }}</h4>
-                            <p layout='center-end'>{{ item.notes }}</p>
-                        </div>
-                    </md-list-item>
-                </md-list>
-            </md-card>
-        </div>
+        <md-card md-theme-watch ng-repeat='opinion in opinions'>
+            <md-card-title>
+                <md-card-title-text>
+                    <h3>Adir Sation</h3>
+                </md-card-title-text>
+                <md-card-title-media>
+                    <img class="md-media-sm card-media" ng-src="images/1.jpg" />
+                </md-card-title-media>
+            </md-card-title>
+            <md-card-content>{{opinion.notes}}</md-card-content>
+        </md-card>
+    </div>
     </div>
 </md-content>
