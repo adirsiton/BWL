@@ -22,12 +22,7 @@ app.controller("worksCtrl", ['$scope', '$location', '$mdDialog', 'worksApi',
             targetEvent: e,
             clickOutsideToClose: true,
             parent: angular.element(document.body),
-            controller: "newWorkCtrl",
-            onComplete: function(scope, elem) {
-                scope.dropzone = new Dropzone("#dropzone", {
-                    url: '/file/upload'
-                })
-            }
+            controller: "newWorkCtrl"
         })
     }
 }]);

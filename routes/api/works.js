@@ -38,6 +38,44 @@ router.get('/:workName', function(req, res, next) {
     })
 });
 
+router.post('/', function(req, res, next) {
+    // Validation check
+    if (req.body.title == '') {
+        res.status(500).send("יש להזין שם לעבודה");
+    } else {
+        // Find the work by its name
+        workDB.getWorkByName(req.body.title, function(e, work) {
+            // If not exist, add a new work
+            if (work == null) {
+                workDB.addWork({
+                    title: req.body.title,
+                    description: req.body.description,
+                    pictures: []
+                }, function(err) {
+                    if (err) {
+                        console.log("Error while adding a new work: " + err);
+                        res.status(500).send("שגיאה בעת הוספת העבודה");
+                    } else {
+                        res.status(200).send();
+                    }
+                })
+            } else {
+                workDB.updateWork({
+                    title: req.body.title,
+                    description: req.body.description
+                }, function(err) {
+                    if (err) {
+                        console.log("Error while adding a new work: " + err);
+                        res.status(500).send("שגיאה בעת עדכון העבודה");
+                    } else {
+                        res.status(200).send();
+                    }
+                })
+            }
+        })
+    };
+})
+
 // MOVE TO ADMIN
 /*router.post('/add', function(req, res, next) {
     workDB.getAllWorks(req.body.newWork, function(err, data) {

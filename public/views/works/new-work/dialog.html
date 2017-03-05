@@ -1,4 +1,6 @@
-<md-dialog style="width: 100%">
+<link rel="stylesheet" href="/views/works/new-work/style.css">
+
+<md-dialog style="width: 50%">
     <md-toolbar class="md-toolbar-tools md-hue-2">
         <h2>עבודה חדשה</h2>
         <span flex></span>
@@ -7,6 +9,18 @@
         </md-button>
     </md-toolbar>
     <md-dialog-content class="md-dialog-content">
-        <div id="dropzone" class="dropzone"></div>
+        <md-input-container class="md-block md-hue-2">
+            <label>שם העבודה</label>
+            <input required ng-model="work.title">
+        </md-input-container>
+
+        <md-input-container class="md-block md-hue-2">
+            <label>תיאור</label>
+            <textarea md-select-on-focus rows="3" ng-model="work.description"></textarea>
+        </md-input-container>
+
+        <md-button ng-click="save()">שמור</md-button>
+
+        <div id="dropzone" class="dropzone" ng-show="saved"></div>
     </md-dialog-content>
 </md-dialog>

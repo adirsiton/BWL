@@ -6,4 +6,8 @@ services.service('worksApi', ['$http', '$q', function($http, $q) {
     this.getWork = function(name) {
         return $http.get('/api/works/' + name);
     }
+
+    this.addWork = function(work) {
+        return $http.post("/api/works", work);
+    }
 }]);
