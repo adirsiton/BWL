@@ -48,6 +48,7 @@ div.main-navbar ul.links {
   flex: 1;
   width: 80%;
   text-align: left;
+  margin: 0;
 }
 
 div.main-navbar ul.links li {

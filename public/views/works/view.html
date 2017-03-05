@@ -1,21 +1,8 @@
 <link rel="stylesheet" href="/views/works/style.css" />
 
-<!--<div id="works-page" layout="column" layout-gt-sm="row">
-    <!--<md-card class="work" flex="25" ng-repeat="work in works">
-        <img ng-src="/api/gallery/{{work.title}}/{{work.pictures[0].picPath}}" class="md-card-image">
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">{{work.title}}</span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-            {{work.description}}
-        </md-card-content>
-    </md-card>->
-    <work-card ng-repeat="work in works" work="work" 
-               flex="100" flex-gt-sm="none"
-               style="min-width:32%!important"></work-card>
-</div>-->
+<md-button class="md-fab md-hue-2" id="add">
+    <i class="material-icons">add</i>
+</md-button>
 
 <div id="works-page">
     <work-card ng-repeat="work in works" work="work" on-click="workClick(work)"
