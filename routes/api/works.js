@@ -1,15 +1,8 @@
 var express = require('express');
+var fs = require('fs');
 var router = express.Router();
-
+var path = require("path");
 var workDB = require('../../controllers/DAL/works.db');
-
-// var fixPicPaths = function(work) {
-//     // Run over the work's pictures
-//     for (var picIndex = 0; picIndex < work.pictures.length; picIndex++) {
-//         // Fix to real path
-//         work.pictures[picIndex].picPath = "/" + work.title + "/" + work.pictures[picIndex].picPath;
-//     }
-// }
 
 router.get('/', function(req, res, next) {
     workDB.getAllWorks(function(err, data) {
@@ -52,6 +45,12 @@ router.post('/', function(req, res, next) {
                         console.log("Error while adding a new work: " + err);
                         res.status(500).send("שגיאה בעת הוספת העבודה");
                     } else {
+                        // Create a new directory in the gallery folder
+                        var galleryDir = path.join('gallery', data.id);
+                        if (!fs.existsSync(galleryDir)) {
+                            fs.mkdirSync(galleryDir);
+                        }
+
                         res.status(200).send();
                     }
                 })
