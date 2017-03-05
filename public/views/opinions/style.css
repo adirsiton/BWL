@@ -1,0 +1,21 @@
+md-content {
+    font-family: gisha;
+}
+
+md-card md-list {
+    margin: 0 auto;
+}
+
+#profile-card img {
+    height: 100px;
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 10px;
+    border-radius: 50px;
+}
+
+#profile-card h2 {
+    margin: 0 auto;
+    padding-top: 10px;
+}
+

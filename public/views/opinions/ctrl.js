@@ -1,45 +1,95 @@
-app.controller("opinionsCtrl", ['$scope', function ($scope) {
+app.controller("opinionsCtrl", ['$scope', '$rootScope', 'facebookApi', function ($scope, $rootScope, facebookApi) {
+  var imagePath = $rootScope.smallUserPicPath;
+  $scope.me = null;
 
-    //if($scope.$parent.userPicPath == '') {
-        //$scope.$parent.getLoginStatus();
-    //}
-    var imagePath = $scope.$parent.userPicPath;
+  /*$scope.getProfilePic = function () {
+    facebookApi.normalProfilePic().then(function (response) {
+      $rootScope.normalProfilePicPath = response.data.url;
+      document.getElementById('profile-picture').src = response.data.url
+    });
+  };*/
 
-    $scope.todos = [
-      {
-        face : imagePath,
-        what: 'רוטשילד',
-        who: 'Adir Sation',
-        when: '3:08PM',
-        notes: "עבודה משוגעת התרשמתי לטובה ממש העובדים נחמדים רצח ואדיר בכלל חתיך"
-      },
-      {
-        face : imagePath,
-        what: 'רוטשילד',
-        who: 'Adir Sation',
-        when: '3:08PM',
-        notes: "עבודה משוגעת התרשמתי לטובה ממש העובדים נחמדים רצח ואדיר בכלל חתיך"
-      },
-     {
-        face : imagePath,
-        what: 'רוטשילד',
-        who: 'Adir Sation',
-        when: '3:08PM',
-        notes: "עבודה משוגעת התרשמתי לטובה ממש העובדים נחמדים רצח ואדיר בכלל חתיך"
-      },
-      {
-        face : imagePath,
-        what: 'רוטשילד',
-        who: 'Adir Sation',
-        when: '3:08PM',
-        notes: "עבודה משוגעת התרשמתי לטובה ממש העובדים נחמדים רצח ואדיר בכלל חתיך"
-      },
-      {
-        face : imagePath,
-        what: 'רוטשילד',
-        who: 'Adir Sation',
-        when: '3:08PM',
-        notes: "עבודה משוגעת התרשמתי לטובה ממש העובדים נחמדים רצח ואדיר בכלל חתיך"
-      }
-    ];
+  /*$scope.init = function () {
+    facebookApi.me().then(function (response) {
+      $rootScope.me = response;
+    });
+
+    $scope.getProfilePic();
+
+    if (!$rootScope.smallUserPicPath) {
+      facebookApi.userPic5656().then(function (response) {
+        $rootScope.smallUserPicPath = response.data.url;
+      });
+
+    }
+  }
+
+  // If the user is not logged in yet
+  if (!$rootScope.loggedIn) {
+    setTimeout(function () {
+      facebookApi.getLoginStatus().then(function (response) {
+        if (response.status != 'connected') {
+          facebookApi.logintoFB().then(function (response) {
+            if (response.status == 'connected') {
+              $rootScope.loggedIn = true;
+              $scope.init()
+            }
+            else {
+              swal(
+                'סליחה...',
+                'אירעה שגיאה בהתחברות לFacebook',
+                'error'
+              )
+            }
+          })
+        }
+      })
+
+    }, 800);
+  }
+  else {
+    $scope.init();
+  }*/
+
+  $scope.logIn = () => {
+    
+  }
+
+  $scope.todos = [
+    {
+      face: imagePath,
+      what: 'רוטשילד',
+      who: 'Adir Sation',
+      when: '3:08PM',
+      notes: "עבודה משוגעת התרשמתי לטובה ממש העובדים נחמדים רצח ואדיר בכלל חתיך"
+    },
+    {
+      face: imagePath,
+      what: 'רוטשילד',
+      who: 'Adir Sation',
+      when: '3:08PM',
+      notes: "עבודה משוגעת התרשמתי לטובה ממש העובדים נחמדים רצח ואדיר בכלל חתיך"
+    },
+    {
+      face: imagePath,
+      what: 'רוטשילד',
+      who: 'Adir Sation',
+      when: '3:08PM',
+      notes: "עבודה משוגעת התרשמתי לטובה ממש העובדים נחמדים רצח ואדיר בכלל חתיך"
+    },
+    {
+      face: imagePath,
+      what: 'רוטשילד',
+      who: 'Adir Sation',
+      when: '3:08PM',
+      notes: "עבודה משוגעת התרשמתי לטובה ממש העובדים נחמדים רצח ואדיר בכלל חתיך"
+    },
+    {
+      face: imagePath,
+      what: 'רוטשילד',
+      who: 'Adir Sation',
+      when: '3:08PM',
+      notes: "עבודה משוגעת התרשמתי לטובה ממש העובדים נחמדים רצח ואדיר בכלל חתיך"
+    }
+  ];
 }])
