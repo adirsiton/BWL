@@ -1,3 +1,8 @@
 #works-page {
     margin-top: 90px;
 }
+
+#add {
+    position: fixed;
+    right: 10px;
+}

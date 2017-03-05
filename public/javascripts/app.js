@@ -23,7 +23,7 @@ app.config(function($routeProvider, $mdThemingProvider, $mdIconProvider) {
 
     $mdThemingProvider.theme('myAwesome')
         .primaryPalette('blue')
-        .accentPalette('blue')
+        .accentPalette('blue-grey')
         .warnPalette('red');
     $mdThemingProvider.setDefaultTheme('myAwesome');
 
