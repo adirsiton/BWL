@@ -6,5 +6,6 @@
 
 <div id="works-page">
     <work-card ng-repeat="work in works" work="work" on-click="workClick(work)"
+               ng-if="work.pictures.length != 0"
                style="min-width: 32%; max-width: 32%; display: inline-block"></work-card>
 </div>
