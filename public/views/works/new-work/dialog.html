@@ -19,7 +19,13 @@
             <textarea md-select-on-focus rows="3" ng-model="work.description"></textarea>
         </md-input-container>
 
-        <md-button ng-click="save()">שמור</md-button>
+        <div layout="row">
+            <md-button ng-click="save()">שמור</md-button>
+            <md-progress-circular md-mode="indeterminate" ng-show="saving"></md-progress-circular>
+            <div ng-show="saved" style="font-size: 36px; color: green">
+                <i class="material-icons">done</i>
+            </div>
+        </div>
 
         <div id="dropzone" class="dropzone" ng-show="saved"></div>
     </md-dialog-content>

@@ -47,11 +47,7 @@ router.post('/', function(req, res, next) {
         workDB.getWorkByName(req.body.title, function(e, work) {
             // If not exist, add a new work
             if (work == null) {
-                workDB.addWork({
-                    title: req.body.title,
-                    description: req.body.description,
-                    pictures: []
-                }, function(err) {
+                workDB.addWork(req.body, function(err, data) {
                     if (err) {
                         console.log("Error while adding a new work: " + err);
                         res.status(500).send("שגיאה בעת הוספת העבודה");
@@ -63,7 +59,7 @@ router.post('/', function(req, res, next) {
                 workDB.updateWork({
                     title: req.body.title,
                     description: req.body.description
-                }, function(err) {
+                }, function(err, data) {
                     if (err) {
                         console.log("Error while adding a new work: " + err);
                         res.status(500).send("שגיאה בעת עדכון העבודה");
