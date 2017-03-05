@@ -2,6 +2,10 @@ app.controller("opinionsCtrl", ['$scope', '$rootScope', 'facebookApi', function 
   var imagePath = $rootScope.smallUserPicPath;
   $scope.me = null;
 
+  facebookApi.normalProfilePic().then(function(response) {
+    $scope.normalSizePic = response.data.url;
+  })
+
   /*$scope.getProfilePic = function () {
     facebookApi.normalProfilePic().then(function (response) {
       $rootScope.normalProfilePicPath = response.data.url;
@@ -55,7 +59,7 @@ app.controller("opinionsCtrl", ['$scope', '$rootScope', 'facebookApi', function 
     
   }
 
-  $scope.todos = [
+  $scope.opinions = [
     {
       face: imagePath,
       what: 'רוטשילד',
