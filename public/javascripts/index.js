@@ -1,29 +1,35 @@
-app.controller("mainCtrl", ['$rootScope', '$scope', '$location','$route', function ($rootScope, $scope, $location, $route) {
-    $scope.userPicPath = '';
-    $scope.loggedStatus = 'Login';
-    $scope.loggedIn = false;
-    
-    $scope.getLoginStatus = function () {
-        FB.getLoginStatus(function (response) {
+app.controller("mainCtrl", ['$rootScope', '$scope', '$location', 'facebookApi', function ($rootScope, $scope, $location, facebookApi) {
+    $rootScope.smallUserPicPath = '';
+    $rootScope.loggedStatus = 'Login';
+    $rootScope.loggedIn = false;
+
+    $scope.handleLoginStatus = function () {
+        facebookApi.getLoginStatus().then(function (response) {
+            // Checking the receieved response
             if (response.status == 'connected') {
-                $scope.loggedIn = true;
-                $scope.loggedStatus = 'Logout';
-                $scope.userPic();
+                $rootScope.loggedIn = true;
+                $rootScope.loggedStatus = 'Logout';
+                $rootScope.userPic();
             }
             else {
-                $scope.loggedIn = false;
-                $scope.loggedStatus = 'Login';
+                $rootScope.loggedIn = false;
+                $rootScope.loggedStatus = 'Login';
             }
         });
     }
 
-    $scope.logintoFB = function () {
-        FB.login(function (response) {
+    $rootScope.userPic = function () {
+        facebookApi.userPic5656().then(function (response) {
+            $rootScope.smallUserPicPath = response.data.url;
+        });
+    }
+
+    $scope.loginToFacebook = function () {
+        facebookApi.logintoFB().then(function (response) {
             if (response.status === 'connected') {
-                $scope.userPic();
-                $scope.loggedIn = !$scope.loggedIn;
-                $scope.loggedStatus = 'Logout';
-                $route.realod();
+                $rootScope.userPic();
+                $rootScope.loggedIn = !$rootScope.loggedIn;
+                $rootScope.loggedStatus = 'Logout';
             } else if (response.status === 'not_authorized') {
                 // The person is logged into Facebook, but not your app.
             } else {
@@ -31,41 +37,19 @@ app.controller("mainCtrl", ['$rootScope', '$scope', '$location','$route', functi
                 // they are logged into this app or not.
             }
         });
+
     }
 
-    $scope.logoutFB = function () {
-        FB.logout(function (response) {
-            $scope.loggedIn = !$scope.loggedIn;
-            $scope.loggedStatus = 'Logoin';
-            $route.realod();
+    $scope.logoutFromFacebook = function () {
+        facebookApi.logoutFB().then(function () {
+            $rootScope.loggedIn = !$scope.loggedIn;
+            $rootScope.loggedStatus = 'Logoin';
         });
     }
 
-    $scope.me = function () {
-        FB.api(
-            "/me",
-            function (response) {
-                if (response && !response.error) {
-                    console.log(response);
-                }
-            }
-        );
-    };
-
-    $scope.userPic = function () {
-        FB.api(
-            "/me/picture?width=56&height=56",
-            function (response) {
-                if (response && !response.error) {
-                    $scope.userPicPath = response.data.url;
-                }
-            }
-        );
-    }
-
     setTimeout(function () {
-        $scope.getLoginStatus();
-    }, 500);
+        $scope.handleLoginStatus();
+    }, 800);
 
     $scope.mainMenu = {
         items: [{
