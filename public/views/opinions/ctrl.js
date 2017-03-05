@@ -2,7 +2,7 @@ app.controller("opinionsCtrl", ['$scope', '$rootScope', 'facebookApi', '$mdDialo
 
   $scope.newOpinionDialog = function (e) {
     $mdDialog.show({
-      templateUrl: '/views/works/new-opinion/dialog.html',
+      templateUrl: '/views/opinions/new-opinion/dialog.html',
       targetEvent: e,
       clickOutsideToClose: true
     })
