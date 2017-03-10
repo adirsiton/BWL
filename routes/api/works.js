@@ -11,9 +11,6 @@ router.get('/', function(req, res, next) {
             res.status(404).send('Cannot get all works');
         }
         else {
-            // Fix picture paths
-            //data.forEach(fixPicPaths);
-
             res.send(data);
         }
     })
@@ -51,22 +48,22 @@ router.post('/', function(req, res, next) {
                             fs.mkdirSync(galleryDir);
                         }
 
-                        res.status(200).send();
+                        res.status(200).json(data);
                     }
                 })
             } else {
-                // workDB.updateWork({
-                //     title: req.body.title,
-                //     description: req.body.description
-                // }, function(err, data) {
-                //     if (err) {
-                //         console.log("Error while adding a new work: " + err);
-                //         res.status(500).send("שגיאה בעת עדכון העבודה");
-                //     } else {
-                //         res.status(200).send();
-                //     }
-                // })
-                res.status(500).send("שם העבודה קיים כבר. אנא בחר חדש.");
+                workDB.updateWork({
+                    title: req.body.title,
+                    description: req.body.description
+                }, function(err, data) {
+                    if (err) {
+                        console.log("Error while adding a new work: " + err);
+                        res.status(500).send("שגיאה בעת עדכון העבודה");
+                    } else {
+                        res.status(200).json(work);
+                    }
+                })
+                //res.status(500).send("שם העבודה קיים כבר. אנא בחר חדש.");
             }
         })
     };
