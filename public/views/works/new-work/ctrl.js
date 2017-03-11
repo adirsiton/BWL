@@ -30,6 +30,7 @@ app.controller("newWorkCtrl", function($scope, $mdDialog, worksApi) {
                             formData.append("workId", res.data._id);
                         });
                     },
+                    dictDefaultMessage: "<strong>שלב שני: העלה תמונות!</strong><br />גרור לכאן תמונות כדי להעלות אותם",
                     accept: function(file, done) {
                         var _this = this;
 

@@ -23,3 +23,7 @@
     display: block;
     opacity: 0.78;
 }
+
+.work .md-card-image {
+    height: auto;
+}
