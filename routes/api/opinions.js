@@ -39,8 +39,8 @@ router.get('/update', function(req, res, next) {
     })
 });
 
-router.get('/add', function(req, res, next) {
-    opinionDB.addOpinion(req.body.newOpinion, function(err, data) {
+router.post('/add', function(req, res, next) {
+    opinionDB.addOpinion(req.body, function(err, data) {
         if(err) {
             console.log(err);
             res.status(404).send('Cannot add new opinion');

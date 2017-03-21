@@ -1,20 +1,28 @@
 <md-dialog style="width: 50%; height: 50%;" aria-label='New Opinion'>
-<md-toolbar class="md-toolbar-tools md-hue-2">
-    <h2>חוות דעת חדשה</h2>
-    <span flex></span>
-    <md-button ng-click="close()">
-        <i class="material-icons">close</i>
-    </md-button>
-</md-toolbar>
-<md-dialog-content class="md-dialog-content">
-    <center>
-        <img id='profile-picture' ng-view='normalProfilePicPath' ng-src="{{normalProfilePicPath}}" />
-        {{}}
-    </center>
-    <form>
-
-    </form>
-</md-dialog-content>
-<md-dialog-actions layout="row">
-</md-dialog-actions>
+    <md-toolbar class="md-toolbar-tools md-hue-2">
+        <h2>חוות דעת חדשה</h2>
+        <span flex></span>
+        <md-button ng-click="close()">
+            <i class="material-icons">close</i>
+        </md-button>
+    </md-toolbar>
+    <md-dialog-content class="md-dialog-content">
+        <center>
+            <img id='profile-picture' ng-view='normalProfilePicPath' ng-src="{{normalProfilePicPath}}" />
+            <h3>{{me}}</h3>
+        </center>
+        <div ng-if='me'>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>כתוב את תגובתך...</label>
+                <input ng-model="opinion">
+            </md-input-container>
+            <center>
+                <md-button class="md-fab" aria-label="Add opinion" ng-click='addOpinion(opinion)'>
+                    <i class="material-icons">done</i>
+                </md-button>
+            </center>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+    </md-dialog-actions>
 </md-dialog>

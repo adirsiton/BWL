@@ -1,4 +1,6 @@
-app.controller("newOpinionCtrl", ['$scope', '$mdDialog', 'facebookApi', '$rootScope', function ($scope, $mdDialog, facebookApi, $rootScope) {
+app.controller("newOpinionCtrl", ['$scope', '$mdDialog', 'facebookApi', '$rootScope', 'opinionsApi', function ($scope, $mdDialog, facebookApi, $rootScope, opinionsApi) {
+    $scope.opinion = '';
+
     $scope.close = function () {
         $mdDialog.hide();
     }
@@ -8,15 +10,40 @@ app.controller("newOpinionCtrl", ['$scope', '$mdDialog', 'facebookApi', '$rootSc
             if (status) {
                 $scope.normalProfilePicPath = $rootScope.normalProfilePicPath;
                 $scope.me = $rootScope.me.name;
+                $scope.myid = $rootScope.me.id
                 swal(
                     'יש !',
                     'התחברת לFacebook בהצלחה',
                     'success'
                 );
-                
+
                 $scope.$digest();
             }
         });
+    }
+
+    $scope.addOpinion = function (opinion) {
+        if (opinion != '') {
+            opinionsApi.addOpinion({
+                user: $scope.myid,
+                opinion: opinion,
+                name : $scope.me
+            }).then(function () {
+                $scope.close();
+                swal(
+                    'יש !',
+                    'חוות הדעת הוספה בהצלחה, תודה !',
+                    'success'
+                );
+            });
+        }
+        else {
+            swal(
+                'רק רגע',
+                'יש להוסיף חוות דעת קודם',
+                'warning'
+            );
+        }
     }
 
     // If the user is not logged in yet
