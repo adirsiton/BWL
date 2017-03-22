@@ -17,7 +17,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-mongoose.connect('mongodb://localhost/BWL');
+mongoose.connect('mongodb://bwl:building8101996@ds137550.mlab.com:37550/heroku_9rr3tg0l');
 
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
