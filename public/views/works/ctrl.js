@@ -12,7 +12,7 @@ app.controller("worksCtrl", ['$scope', '$location', '$mdDialog', 'worksApi',
     $scope.fetchWorks();
 
     $scope.workClick = function(work) {
-        $location.path("/works/" + work.title);
+        $location.path("/works/" + work._id);
     }
 
     $scope.newWorkDialog = function(e) {

@@ -23,12 +23,38 @@ app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', function($sco
 
     $scope.$on('$routeChangeSuccess', $scope.init);
 
+    $scope.updateWork = function() {
+        worksApi.updateWork($scope.work).then(function() {
+            swal("יש לנו את זה", "עדכון העבודה קרה בהצלחה", "success");
+        }, function(res) {
+            swal("שגיאה בעת העדכון", res.text, "error");
+        });
+    }
+
     $scope.actions = [{
+        desc: "הוספת תמונות",
+        iconName: "add",
+        //bgcolor: 'rgba(41,98,255)',
+        func: function() {
+            alert("soon");
+        }
+    },
+    {
         desc: "ערוך",
         iconName: "edit",
-        bgcolor: 'rgb(41,98,255)',
-        func: function() {
-            alert("editing this work");
+        //bgcolor: 'rgb(41,98,255)',
+        func:function() {
+            $scope.editMode = !$scope.editMode;
+            if ($scope.editMode) {
+                this.iconName = 'done';
+                this.desc = 'שמור';
+            } else {
+                // save the work
+                $scope.updateWork();
+                
+                this.iconName = 'edit';
+                this.desc = 'ערוך';
+            }
         }
     }, {
         desc: "מחק",

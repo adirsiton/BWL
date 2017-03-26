@@ -4,16 +4,25 @@
     <md-card style="margin:0; background-color:#eceff1">
         <md-card-title>
             <md-card-title-text>
-                <span class="md-headline">{{work.title}}</span>
+                <span class="md-headline" ng-show="!editMode">{{work.title}}</span>
+                <md-input-container ng-show="editMode">
+                    <label>שם העבודה</label>
+                    <input type="text" ng-model="work.title" required />
+                </md-input-container>
             </md-card-title-text>
         </md-card-title>
         <md-card-content>
-            {{work.description}}
+            <span ng-show="!editMode">{{work.description}}</span>
+            <md-input-container class="md-block" ng-show="editMode">
+                <label>תיאור העבודה</label>
+                <textarea ng-model="work.description" rows="5" md-select-on-focus></textarea>
+            </md-input-container>
             <md-card-actions layout="row" style="margin:0;" layout-align="end center">
                 <md-button  class="md-fab md-mini" 
                             ng-repeat="btn in actions" 
                             ng-click="btn.func()"
-                            style="background-color: {{btn.bgcolor}}; margin-right:2px">
+                            style="background-color: {{btn.bgcolor}}; margin:2px">
+                    <md-tooltip md-direction="buttom">{{btn.desc}}</md-tooltip>
                     <i class="material-icons">{{btn.iconName}}</i>
                 </md-button>
             </md-card-actions>

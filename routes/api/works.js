@@ -16,8 +16,8 @@ router.get('/', function(req, res, next) {
     })
 });
 
-router.get('/:workName', function(req, res, next) {
-    workDB.getWorkByName(req.params.workName, function(err, data) {
+router.get('/:workId', function(req, res, next) {
+    workDB.getWorkById(req.params.workId, function(err, data) {
         if(err) {
             console.log(err);
             res.status(404).send('Cannot get work');
@@ -67,6 +67,35 @@ router.post('/', function(req, res, next) {
             }
         })
     };
+})
+
+router.put('/', function(req, res, next) {
+    // Validation check
+    if (req.body.title == '') {
+        res.status(500).send("יש להזין שם לעבודה");
+    } else {
+        // Find the work by its name
+        workDB.getWorkByName(req.body.title, function(e, work) {
+            // Check if the given name taken
+            if ((work != null) && (work._id != req.body._id)) {
+                res.send(500).send("השם שבחרת כבר תפוס...");
+            } else {
+                // Everything is good to go: update the work in the db.
+                workDB.updateWork({
+                    title: req.body.title,
+                    description: req.body.description,
+                    _id: req.body._id
+                }, function(err, data) {
+                    if (err) {
+                        console.log("Error while adding a new work: " + err);
+                        res.status(500).send("שגיאה בעת עדכון העבודה");
+                    } else {
+                        res.status(200).json(work);
+                    }
+                })
+            }
+        });
+    }
 })
 
 // MOVE TO ADMIN

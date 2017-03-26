@@ -3,11 +3,12 @@
 }
 
 #gallery {
+    margin-top: 3px;
     text-align: center;
 }
 
 #gallery .masonry-brick {
-    margin: 3px;
-    min-width: 215px;
-    max-width: 215px;
+    margin: 1px;
+    /*min-width: 215px;
+    max-width: 215px;*/
 }
