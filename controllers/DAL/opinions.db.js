@@ -13,7 +13,12 @@ module.exports.getUserOpinions = (fbId, callback) => {
 };
 
 module.exports.addOpinion = (newOpinion, callback) => {
-    var newOpinion = new opinionModel(newUser);
+    var parsedOp = {
+        userFbId : newOpinion.user,
+        opinion : newOpinion.opinion,
+        name : newOpinion.name
+    };
+    var newOpinion = new opinionModel(parsedOp);
     newOpinion.save(callback);
 };
 

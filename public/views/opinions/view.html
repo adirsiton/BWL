@@ -1,5 +1,5 @@
 <link rel='stylesheet' href='views/opinions/style.css'>
-<script src='javascripts/facebookSDK.js'></script>
+<script src='javascripts/all.js'></script>
 
 <md-button class="md-fab md-hue-2" id="add" ng-click="newOpinionDialog($event)">
     <i class="material-icons">add</i>
@@ -7,17 +7,18 @@
 
 <md-content>
     <div layout="row">
-        <md-card md-theme-watch ng-repeat='opinion in opinions'>
+        <md-card md-theme-watch ng-repeat='opinion in opinions' ng-if='opinions.length > 0' id='profile-card'>
             <md-card-title>
                 <md-card-title-text>
                     <h3>Adir Sation</h3>
                 </md-card-title-text>
                 <md-card-title-media>
-                    <img class="md-media-sm card-media" ng-src="images/1.jpg" />
+                    <img class="md-media-sm card-media" ng-src="{{opinion.pic}}" />
                 </md-card-title-media>
             </md-card-title>
-            <md-card-content>{{opinion.notes}}</md-card-content>
+            <md-card-content>{{opinion.opinion}}</md-card-content>
         </md-card>
     </div>
     </div>
+    <h1 ng-if='opinions == 0' style='text-align: center; margin: 0 auto;'>אין חוות דעת</h1>
 </md-content>

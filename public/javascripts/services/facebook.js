@@ -64,6 +64,19 @@ services.service('facebookApi', ['$rootScope', function ($rootScope) {
         })
     }
 
+    this.getUserProfilePicture = (userFbId) => {
+        return new Promise(function (resolve, reject) {
+            FB.api(
+                "/" + userFbId + "/picture?type=normal",
+                function (response) {
+                    if (response && !response.error) {
+                        resolve(response);
+                    }
+                }
+            );
+        })
+    }
+
     this.checkUserDataStatus = function (isNormalPic) {
         return new Promise(function (resolve, reject, funcs) {
             // Checking if the user has already gotten the small user pic
@@ -78,7 +91,10 @@ services.service('facebookApi', ['$rootScope', function ($rootScope) {
 
                             if (!$rootScope.me) {
                                 self.me().then(function (response) {
-                                    $rootScope.me = response.data;
+                                    $rootScope.me = {
+                                        name: response.name,
+                                        id: response.id
+                                    };
 
                                     resolve(true);
                                 })
