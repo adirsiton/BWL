@@ -78,7 +78,7 @@ router.put('/', function(req, res, next) {
         workDB.getWorkByName(req.body.title, function(e, work) {
             // Check if the given name taken
             if ((work != null) && (work._id != req.body._id)) {
-                res.send(500).send("השם שבחרת כבר תפוס...");
+                res.status(500).send("השם שבחרת כבר תפוס...");
             } else {
                 // Everything is good to go: update the work in the db.
                 workDB.updateWork({
@@ -96,6 +96,20 @@ router.put('/', function(req, res, next) {
             }
         });
     }
+})
+
+router.delete('/:workId', function(req, res, next) {
+    // Check if the work exist
+    workDB.getWorkById(req.params.workId, function(err, work) {
+        if (err) {
+            console.log(err);
+            res.status(500).send("חלה שגיאה בעת אימות העבודה שאתה מנסה למחוק");
+        } else {
+            workDB.removeWork(req.params.workId, function(e) {
+
+            })
+        }
+    })
 })
 
 // MOVE TO ADMIN
