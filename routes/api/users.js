@@ -27,5 +27,10 @@ router.get('/Id/:Id', function(req, res, next) {
     })
 });
 
+router.get('/isadmin/:userId', function(req, res, next) {
+    userDB.isAdmin(req.params.userId, (err, isAdmin) => {
+        res.status(200).send(isAdmin);
+    });
+})
 
 module.exports = router;

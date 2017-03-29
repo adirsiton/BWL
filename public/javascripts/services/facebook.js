@@ -25,6 +25,10 @@ services.service('facebookApi', ['$rootScope', function ($rootScope) {
         });
     }
 
+    this.isAdmin = function(userId) {
+        return $http.get('/api/users/isadmin/' + userId);
+    }
+
     this.me = function () {
         return new Promise(function (resolve, reject) {
             FB.api(

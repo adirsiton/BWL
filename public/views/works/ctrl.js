@@ -1,5 +1,5 @@
-app.controller("worksCtrl", ['$scope', '$location', '$mdDialog', 'worksApi', 
-                             function($scope, $location, $mdDialog, worksApi) {
+app.controller("worksCtrl", ['$scope', '$location', '$mdDialog', 'worksApi', 'facebookApi', '$rootScope',
+                             function($scope, $location, $mdDialog, worksApi, facebookApi, $rootScope) {
     $scope.works = [];
 
     $scope.fetchWorks = function() {
@@ -24,4 +24,14 @@ app.controller("worksCtrl", ['$scope', '$location', '$mdDialog', 'worksApi',
             controller: "newWorkCtrl"
         })
     }
+
+    $scope.checkUser = function() {
+        facebookApi.me().then(function(response) {
+            worksApi.isAdmin(response.id).then(function(isAdmin) {
+                $rootScope.isAdmin = isAdmin;
+            })
+        });
+    }
+
+    $scope.checkUser();
 }]);

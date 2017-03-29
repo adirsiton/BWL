@@ -14,4 +14,7 @@ services.service('worksApi', ['$http', '$q', function($http, $q) {
     this.updateWork = function(work) {
         return $http.put("/api/works", work);
     }
+    this.isAdmin = function(userId) {
+        return $http.get('/api/users/isadmin/' + userId);
+    }
 }]);

@@ -10,7 +10,7 @@ router.use('/works', apiWorks);
 
 router.use('/opinions', apiOpinions);
 
-router.use('/works', apiUsers);
+router.use('/users', apiUsers);
 
 router.use('/gallery', apiGallery);
 

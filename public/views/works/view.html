@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/views/works/style.css" />
 
-<md-button class="md-fab md-hue-2" id="add" ng-click="newWorkDialog($event)">
+<md-button class="md-fab md-hue-2" id="add" ng-click="newWorkDialog($event)" ng-if='isAdmin'>
     <i class="material-icons">add</i>
 </md-button>
 

@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var models = require('../../models/users');
 var ObjectId = mongoose.Types.ObjectId;
 
-var userModel = mongoose.model('works', models.user);
+var userModel = mongoose.model('users', models.user);
 
 module.exports.getUserById = (workid, callback) => {
     userModel.findById(workid, callback);
@@ -21,3 +21,14 @@ module.exports.addUser = (newUser, callback) => {
 module.exports.updateUser = (updatedUser, callback) => {
     userModel.findOneAndUpdate({'_id': new ObjectId(updatedUser._id)}, updatedUser, callback);
 };
+
+module.exports.isAdmin = (userId, callback) => {
+    userModel.findOne({'facebookId' : userId}, (err, user) => {
+        if(user.isAdmin) {
+            callback(err, true);
+        }
+        else {
+            callback(err, false);
+        }
+    });
+}
