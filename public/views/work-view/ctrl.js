@@ -1,4 +1,4 @@
-app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', function($scope, $location, worksApi) {
+app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi', function($scope, $location, worksApi, facebookApi) {
     $scope.work = {};
 
     $scope.init = function() {
@@ -75,4 +75,14 @@ app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', function($sco
             })
         }
     }]
+
+    $scope.checkUser = function() {
+        facebookApi.me().then(function(response) {
+            worksApi.isAdmin(response.id).then(function(isAdmin) {
+                $rootScope.isAdmin = isAdmin.data;
+            })
+        });
+    }
+
+    $scope.checkUser();    
 }]);

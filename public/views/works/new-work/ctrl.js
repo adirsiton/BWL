@@ -1,4 +1,4 @@
-app.controller("newWorkCtrl", function($scope, $mdDialog, worksApi) {
+app.controller("newWorkCtrl", function($scope, $mdDialog, worksApi, facebookApi) {
     $scope.saved = false;
 
     $scope.hide = function() {
@@ -26,8 +26,13 @@ app.controller("newWorkCtrl", function($scope, $mdDialog, worksApi) {
                 $scope.dropzone = new Dropzone("#dropzone", {
                     url: "/api/gallery/upload",
                     init: function() {
+                        facebookApi.me().then(function(user) {
+                            $scope.userId = user.id;
+                        })
+                        
                         this.on("sending", function(file, xhr, formData){
                             formData.append("workId", res.data._id);
+                            formData.append("userId", $scope.userId);
                         });
                     },
                     dictDefaultMessage: "<strong>שלב שני: העלה תמונות!</strong><br />גרור לכאן תמונות כדי להעלות אותם",

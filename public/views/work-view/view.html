@@ -17,7 +17,7 @@
                 <label>תיאור העבודה</label>
                 <textarea ng-model="work.description" rows="5" md-select-on-focus></textarea>
             </md-input-container>
-            <md-card-actions layout="row" style="margin:0;" layout-align="end center">
+            <md-card-actions layout="row" style="margin:0;" layout-align="end center" ng-show="isAdmin">
                 <md-button  class="md-fab md-mini" 
                             ng-repeat="btn in actions" 
                             ng-click="btn.func()"

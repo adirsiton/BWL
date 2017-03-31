@@ -1,4 +1,4 @@
-services.service('facebookApi', ['$rootScope', function ($rootScope) {
+services.service('facebookApi', ['$rootScope', '$http', function ($rootScope, $http) {
     var self = this;
 
     this.getLoginStatus = function () {
@@ -12,6 +12,12 @@ services.service('facebookApi', ['$rootScope', function ($rootScope) {
     this.logintoFB = function (name) {
         return new Promise(function (resolve, reject) {
             FB.login(function (response) {
+                self.me().then(function(user) {
+                    $rootScope.me = user;
+                    self.isAdmin(user.id).then(function(res) {
+                        $rootScope.isAdmin = res.data;
+                    });
+                });
                 resolve(response);
             });
         });
@@ -21,6 +27,7 @@ services.service('facebookApi', ['$rootScope', function ($rootScope) {
         return new Promise(function (resolve, reject) {
             FB.logout(function (response) {
                 resolve(response);
+                $rootScope.isAdmin = false;
             });
         });
     }
@@ -36,6 +43,8 @@ services.service('facebookApi', ['$rootScope', function ($rootScope) {
                 function (response) {
                     if (response && !response.error) {
                         resolve(response);
+                    } else {
+                        reject(response.error);
                     }
                 }
             );
