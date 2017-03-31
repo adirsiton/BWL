@@ -75,14 +75,5 @@ app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi'
             })
         }
     }]
-
-    $scope.checkUser = function() {
-        facebookApi.me().then(function(response) {
-            worksApi.isAdmin(response.id).then(function(isAdmin) {
-                $rootScope.isAdmin = isAdmin.data;
-            })
-        });
-    }
-
-    $scope.checkUser();    
+ 
 }]);
