@@ -1,4 +1,4 @@
-app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi', function($scope, $location, worksApi, facebookApi) {
+app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi', '$location', function($scope, $location, worksApi, facebookApi, $location) {
     $scope.work = {};
 
     $scope.init = function() {
@@ -70,7 +70,11 @@ app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi'
                 closeOnCancel: true
             }, function(confirmed) {
                 if (confirmed) {
-                    swal("העבודה נמחקה בהצלחה!", "אתה מועבר עכשיו לדף הבית", "success");
+                    worksApi.deleteWork($scope.work._id).then(function(res) {
+                        $location.path("works");
+                    }).catch(function(res) {
+                        error("שגיאה: " + res.text);
+                    });
                 }
             })
         }

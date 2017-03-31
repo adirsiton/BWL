@@ -28,6 +28,14 @@ services.service('worksApi', ['$http', '$q', '$rootScope', function($http, $q, $
         work.userId = $rootScope.me.id;
         return $http.put("/api/works", work);        
     }
+
+    this.deleteWork = function(workId) {
+        return $http({
+            method: 'delete',
+            url:    "/api/works/" + $rootScope.me.id + "/" + workId
+        });
+    }
+
     this.isAdmin = function(userId) {
         return $http.get('/api/users/isadmin/' + userId);
     }

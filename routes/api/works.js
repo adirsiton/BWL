@@ -117,20 +117,27 @@ router.put('/', function(req, res, next) {
     });
 })
 
-router.delete('/:workId', function(req, res, next) {
-    // Check if the work exist
-    workDB.getWorkById(req.params.workId, function(err, work) {
-        if (err) {
-            console.log(err);
-            res.status(500).send("חלה שגיאה בעת אימות העבודה שאתה מנסה למחוק");
+router.delete('/:userId/:workId', function(req, res, next) {
+    // Check that user is ADMIN
+    userDB.isAdmin(req.params.userId, function(dbErr, isAdmin) {
+        if (!isAdmin) {
+            res.status(403).send("אינך מורשה לבצע פעולה זו");
         } else {
-            workDB.removeWork(req.params.workId, function(e) {
-                if (e) {
-                    res.status(500)
+            // Check if the work exist
+            workDB.getWorkById(req.params.workId, function(err, work) {
+                if (err) {
+                    console.log(err);
+                    res.status(500).send("חלה שגיאה בעת אימות העבודה שאתה מנסה למחוק");
+                } else {
+                    workDB.removeWork(req.params.workId, function(e) {
+                        if (e) {
+                            res.status(500)
+                        }
+                    })
                 }
-            })
+            });
         }
-    })
+    });
 })
 
 // MOVE TO ADMIN
