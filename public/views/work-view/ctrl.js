@@ -1,4 +1,4 @@
-app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi', '$location', function($scope, $location, worksApi, facebookApi, $location) {
+app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi', '$location', '$timeout', function($scope, $location, worksApi, facebookApi, $location, $timeout) {
     $scope.work = {};
 
     $scope.init = function() {
@@ -71,9 +71,12 @@ app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi'
             }, function(confirmed) {
                 if (confirmed) {
                     worksApi.deleteWork($scope.work._id).then(function(res) {
-                        $location.path("works");
+                        alertify.success("העבודה נמחקה בהצלחה, אתה מועבר לדף קטלוג העבודות");
+                        $timeout(function() {
+                            $location.path("works");
+                        }, 1000);
                     }).catch(function(res) {
-                        error("שגיאה: " + res.text);
+                        alertify.error("חלה שגיאה בעת מחיקת העבודה: " + res.text);
                     });
                 }
             })
