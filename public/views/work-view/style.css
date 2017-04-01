@@ -12,3 +12,11 @@
     /*min-width: 215px;
     max-width: 215px;*/
 }
+
+.pointer {
+    cursor: pointer;
+}
+
+.pointer:hover {
+    border: 2px solid red;
+}

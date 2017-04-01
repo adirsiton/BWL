@@ -28,7 +28,7 @@ app.controller("worksCtrl", ['$scope', '$location', '$mdDialog', 'worksApi', 'fa
     $scope.checkUser = function() {
         facebookApi.me().then(function(response) {
             worksApi.isAdmin(response.id).then(function(isAdmin) {
-                $rootScope.isAdmin = isAdmin;
+                $rootScope.isAdmin = isAdmin.data;
             })
         });
     }

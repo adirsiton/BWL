@@ -24,10 +24,9 @@ module.exports.updateUser = (updatedUser, callback) => {
 
 module.exports.isAdmin = (userId, callback) => {
     userModel.findOne({'facebookId' : userId}, (err, user) => {
-        if(user.isAdmin) {
+        if(user != null && user.isAdmin) {
             callback(err, true);
-        }
-        else {
+        } else {
             callback(err, false);
         }
     });
