@@ -31,6 +31,11 @@ module.exports.addPictures = (workId, newPicPaths, callback) => {
                                 {$push : {"pictures" : {$each : newPicPaths}}},
                                 callback);
 };
+
 module.exports.removeWork = (workId, callback) => {
     workModel.findById(workId).remove(callback);
 };
+
+module.exports.removePicture = (workId, picPath, callback) => {
+    workModel.update({_id: workId}, {$pull: { pictures: {picPath: picPath }}}, callback);
+}

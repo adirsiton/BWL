@@ -32,7 +32,9 @@
         <img class="masonry-brick" 
             ng-repeat="image in work.pictures" 
             ng-src="/api/gallery/{{work._id}}/{{image.picPath}}"
-            style="height: {{image.height}}px">
-            <!--<img class="repeated-img masonry-brick" ng-repeat="image in images" ng-src="http://placehold.it/225x{{image.height}}/{{image.color.bg}}/{{image.color.text}}&text={{image.num}}" />-->
+            ng-click="pictureClick(image)"
+            style="width: {{image.height}}px; height: 200px" 
+            ng-class="{'pointer': editMode}"
+            ng-if="!image.hide">
     </div>
 </div>

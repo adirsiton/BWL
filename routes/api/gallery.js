@@ -1,4 +1,5 @@
 var express = require('express');
+var fs = require("fs");
 var router = express.Router();
 var path = require("path");
 var workDB = require('../../controllers/DAL/works.db');
@@ -73,6 +74,34 @@ router.post('/upload', function(req, res) {
                     }
                 })
             }
+        }
+    });
+})
+
+router.delete("/:userId/:workId/:picPath", function(req, res, next) {
+    // Check that user is ADMIN
+    userDB.isAdmin(req.params.userId, function(dbErr, isAdmin) {
+        if (!isAdmin) {
+            res.status(403).send("אינך מורשה לבצע פעולה זו");
+        } else {
+            var fileFullPath = path.join(path.dirname(path.dirname(process.mainModule.filename)), "gallery", req.params.workId, req.params.picPath)
+
+            // Remove physical file
+            fs.exists(fileFullPath, function(exists) {
+                if (exists) {
+                    //fs.unlink(fileFullPath);
+
+                    // Delete the picture
+                    workDB.removePicture(req.params.workId, req.params.picPath, function(e) {
+                        if (e) {
+                            console.log(e);
+                            res.status(500).send("שגיאה בעת מחיקת התמונה");
+                        }
+                    });                    
+                } else {
+                    res.status(401).send("התמונה לא נמצאה, בדוק שהיא תחת העבודה הזאת באמת");
+                }
+            })
         }
     });
 })

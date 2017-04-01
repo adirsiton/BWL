@@ -1,4 +1,4 @@
-app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi', '$location', '$timeout', function($scope, $location, worksApi, facebookApi, $location, $timeout) {
+app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi', '$location', '$timeout', '$mdToast', function($scope, $location, worksApi, facebookApi, $location, $timeout, $mdToast) {
     $scope.work = {};
 
     $scope.init = function() {
@@ -22,6 +22,17 @@ app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi'
     var heights = [200, 225, 150, 160, 240, 310, 260, 250, 180]
 
     $scope.$on('$routeChangeSuccess', $scope.init);
+
+    $scope.pictureClick = function(pic) {
+        if ($scope.editMode) {
+            worksApi.deletePicture($scope.work._id, pic.picPath).then(function() {
+                alertify.success("התמונה נמחקה בהצלחה");
+                pic.hide = true;
+            }).catch(function(res) {
+                swal("שגיאה בעת מחיקת התמונה", res.text, "error");
+            })
+        }
+    }
 
     $scope.updateWork = function() {
         worksApi.updateWork($scope.work).then(function() {
@@ -48,6 +59,8 @@ app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi'
             if ($scope.editMode) {
                 this.iconName = 'done';
                 this.desc = 'שמור';
+
+                swal("לחץ על אחת התמונות כדי להסיר אותה");
             } else {
                 // save the work
                 $scope.updateWork();

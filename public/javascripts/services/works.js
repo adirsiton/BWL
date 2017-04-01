@@ -36,6 +36,10 @@ services.service('worksApi', ['$http', '$q', '$rootScope', function($http, $q, $
         });
     }
 
+    this.deletePicture = function(workId, picPath) {
+        return $http.delete('/api/gallery/' + $rootScope.me.id + '/' + workId + '/' + picPath);
+    }
+
     this.isAdmin = function(userId) {
         return $http.get('/api/users/isadmin/' + userId);
     }
