@@ -132,6 +132,8 @@ router.delete('/:userId/:workId', function(req, res, next) {
                     workDB.removeWork(req.params.workId, function(e) {
                         if (e) {
                             res.status(500)
+                        } else {
+                            res.status(200).send();
                         }
                     })
                 }
