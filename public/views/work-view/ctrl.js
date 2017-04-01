@@ -1,4 +1,4 @@
-app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi', '$location', '$timeout', '$mdToast', function($scope, $location, worksApi, facebookApi, $location, $timeout, $mdToast) {
+app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi', '$location', '$timeout', '$mdDialog', '$rootScope', function($scope, $location, worksApi, facebookApi, $location, $timeout, $mdDialog, $rootScope) {
     $scope.work = {};
 
     $scope.init = function() {
@@ -47,7 +47,7 @@ app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi'
         iconName: "add",
         //bgcolor: 'rgba(41,98,255)',
         func: function() {
-            alert("soon");
+            $scope.showAddPicturesDialog();
         }
     },
     {
@@ -95,5 +95,54 @@ app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi'
             })
         }
     }]
+
+    $scope.showAddPicturesDialog = function() {
+        $mdDialog.show({
+            templateUrl: '/views/work-view/add-pictures/dialog.html',
+            clickOutsideToClose: true,
+            parent: angular.element(document.body),
+            controller: "addPicturesCtrl",
+            onComplete: function(scope) {
+                scope.dropzone = new Dropzone("#dropzone", {
+                    url: "/api/gallery/upload",
+                    init: function() {
+                        this.on("sending", function(file, xhr, formData){
+                            formData.append("workId", scope.work._id);
+                            formData.append("userId", scope.userId);
+                        });
+                    },
+                    dictDefaultMessage: "<strong>שלב שני: העלה תמונות!</strong><br />גרור לכאן תמונות כדי להעלות אותם",
+                    accept: function(file, done) {
+                        var _this = this;
+
+                        // Check if the picture already exist
+                        if (_.find(scope.work.pictures, pic => pic.picPath == file.name)) {
+                            swal({
+                                title: "התמונה כבר קיימת",
+                                text: "אם תאשר, התמונה הקיימת תוחלף במה שהעלאת עכשיו. האם אתה בטוח? מדובר על " + file.name,
+                                type: "warning",
+                                showCancelButton: true,
+                                closeOnConfirm: true
+                            }, function(confirmed) {
+                                if (confirmed) {
+                                    done();
+                                }
+                            })
+                        } else {
+                            done
+                            if (!scope.work.pictures) {
+                                scope.work.pictures = [];
+                            }
+                            scope.work.pictures.push({ picPath: file.name });
+                        }
+                    }
+                }); 
+            },
+            scope: {
+                work: $scope.work,
+                userId: $rootScope.me.id
+            }
+        })
+    }
  
 }]);
