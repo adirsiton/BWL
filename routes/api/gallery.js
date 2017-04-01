@@ -96,6 +96,8 @@ router.delete("/:userId/:workId/:picPath", function(req, res, next) {
                         if (e) {
                             console.log(e);
                             res.status(500).send("שגיאה בעת מחיקת התמונה");
+                        } else {
+                            res.status(200).send("התמונה נמחקה בהצלחה");
                         }
                     });                    
                 } else {

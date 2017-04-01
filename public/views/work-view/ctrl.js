@@ -29,7 +29,7 @@ app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi'
                 alertify.success("התמונה נמחקה בהצלחה");
                 pic.hide = true;
             }).catch(function(res) {
-                swal("שגיאה בעת מחיקת התמונה", res.text, "error");
+                swal("שגיאה בעת מחיקת התמונה", res.data, "error");
             })
         }
     }
