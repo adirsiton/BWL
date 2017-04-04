@@ -9,7 +9,12 @@
             "request": "launch",
             "name": "Launch Program",
             "program": "${workspaceRoot}\\bin\\www",
-            "cwd": "${workspaceRoot}"
+            "cwd": "${workspaceRoot}",
+            "env": {
+                "AWS_ACCESS_KEY": "akiajalv5fwnthhskwpa",
+                "AWS_SECRET_ACCESS_KEY": "vyoQiRcRh4cCDLtGuWaGc1KN10TGC6MtPBGqpMmw",
+                "S3_BUCKET": "building-with-love"
+            }
         },
         {
             "type": "node",
