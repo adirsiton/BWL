@@ -112,6 +112,9 @@ services.service('facebookApi', ['$rootScope', '$http', function ($rootScope, $h
                                     resolve(true);
                                 })
                             }
+                            else {
+                                resolve(true);
+                            }
                         })
                     }
                 })
