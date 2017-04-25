@@ -4,29 +4,37 @@ var router = express.Router();
 var path = require("path");
 var workDB = require('../../controllers/DAL/works.db');
 var userDB = require('../../controllers/DAL/users.db');
-var S3_BUCKET = process.env.S3_BUCKET;
-const aws = require('aws-sdk');
-aws.config.update({
-    accessKeyId : "AKIAJALV5FWNTHHSKWPA",
-    secretAccessKey : "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"
-})
-const s3 = new aws.S3({signatureVersion: 'v4'});
+var cloudinary = require('cloudinary');
+var server = require('../../app');
+var btoa = require('btoa');
 
-router.get("/", function (req, res, next) {
-    res.send("123");
+cloudinary.config({
+    cloud_name: 'hn3eejfzz',
+    api_key: '367632271753551',
+    api_secret: 'nQ55R_HvkP55ElaGRg9NbK97e78'
+});
+
+function Uint8ToString(u8a) {
+    var CHUNK_SZ = 0x8000;
+    var c = [];
+    for (var i = 0; i < u8a.length; i += CHUNK_SZ) {
+        c.push(String.fromCharCode.apply(null, u8a.subarray(i, i + CHUNK_SZ)));
+    }
+    return c.join("");
+}
+
+router.get('/', function (req, res, next) {
+    res.send(123);
 })
 
 router.get('/:workName/:imageName', function (req, res, next) {
     var imageName = req.params.imageName;
     var workName = req.params.workName;
 
-    var appDirPath = path.dirname(path.dirname(process.mainModule.filename));
+    res.send(cloudinary.url(workName + '/' + imageName));
+});
 
-    // Find the file and return it
-    res.sendFile(path.join(appDirPath, "gallery", workName, imageName));
-})
-
-router.post('/upload', function (req, res) {
+router.post('/upload', function (req, res, next) {
     // Check that user is ADMIN
     userDB.isAdmin(req.body.userId, function (dbErr, isAdmin) {
         if (!isAdmin) {
@@ -39,68 +47,55 @@ router.post('/upload', function (req, res) {
                 res.status(400).send("לא נשלחו קבצים");
             } else {
                 var file = req.files.file;
-                var fileFullPath = path.join(path.dirname(path.dirname(process.mainModule.filename)), "gallery", req.body.workId, file.name);
-                const s3Params = {
-                    Bucket: S3_BUCKET,
-                    Key: file.name,
-                    ContentType: 'image/jpeg',
-                    ACL: 'public-read'
-                };
-
-                s3.putObject(s3Params, (err, data) => {
-                    if(err) {
-                        console.log(err);
-                        return res.end();
+                var encoded64img = btoa(Uint8ToString(file.data));
+                cloudinary.v2.uploader.upload('data:image/png;base64,' + encoded64img, { public_id: req.body.workId + '/' + file.name }, function (error, result) {
+                    if (error) {
+                        console.log(error);
                     }
-                    /*const returnData = {
-                        signedRequest: data,
-                        url: 'https://${S3_BUCKET}.s3.amazonaws.com/${file.name}'
-                    }*/
                 });
-                /*file.mv(fileFullPath, function (err) {
+
+                // Find the wanted work
+                workDB.getWorkById(req.body.workId, function (err, data) {
+                    var currPicPath = cloudinary.v2.url(req.body.workId + '/' + file.name + ".jpg", { secure: true,}).replace("<img src='", '').replace(" />'", '');
+
                     if (err) {
-                        console.log(err);
-                        res.status(500).send("בדוק שהעבודה קיימת!");
+                        res.status(500).send("לא ניתן לעדכן את העבודה, בדוק שהיא קיימת");
                     } else {
-                        // Find the wanted work*/
-                        workDB.getWorkById(req.body.workId, function (err, data) {
-                            if (err) {
-                                res.status(500).send("לא ניתן לעדכן את העבודה, בדוק שהיא קיימת");
-                            } else {
-                                var picExist = false;
+                        var picExist = false;
 
-                                // Run over the work pictures
-                                for (var curr in data.pictures) {
-                                    // Check if the current picture name equals to the uploaded picture name
-                                    if (data.pictures[curr].picPath == file.name) {
-                                        picExist = true;
-                                    }
-                                }
-
-                                // If the picture does not exist already
-                                if (!picExist) {
-                                    workDB.updateWork({
-                                        _id: req.body.workId,
-                                        $push: {
-                                            pictures: { picPath: file.name }
-                                        }
-                                    }, function (err, data) {
-                                        if (err) {
-                                            console.error(err);
-                                            res.status(500).send("שגיאה בעת עדכון העבודה");
-                                        } else {
-                                            res.status(200).send("הקבצים הועלו בהצלחה");
-                                        }
-                                    })
-                                }
+                        // Run over the work pictures
+                        for (var curr in data.pictures) {
+                            // Check if the current picture name equals to the uploaded picture name
+                            if (data.pictures[curr].picPath == currPicPath) {
+                                picExist = true;
                             }
-                        })
-                    //}
-                //})
+                        }
+
+                        // If the picture does not exist already
+                        if (!picExist) {
+                            workDB.updateWork({
+                                _id: req.body.workId,
+                                $push: {
+                                    pictures: { picPath: currPicPath }
+                                }
+                            }, function (err, data) {
+                                if (err) {
+                                    console.error(err);
+                                    res.status(500).send("שגיאה בעת עדכון העבודה");
+                                } else {
+                                    res.status(200).send("הקבצים הועלו בהצלחה");
+                                }
+                            })
+                        }
+                        else {
+                            res.status(200).send('ok');
+                        }
+                    }
+                });
             }
         }
-4    });
-})
+    });
+});
 
 router.delete("/:userId/:workId/:picPath", function (req, res, next) {
     // Check that user is ADMIN
@@ -130,6 +125,6 @@ router.delete("/:userId/:workId/:picPath", function (req, res, next) {
             })
         }
     });
-})
+});
 
 module.exports = router;

@@ -31,7 +31,7 @@
     <div id="gallery" masonry>
         <img class="masonry-brick" 
             ng-repeat="image in work.pictures" 
-            ng-src="/api/gallery/{{work._id}}/{{image.picPath}}"
+            ng-src="{{image.picPath}}"
             ng-click="pictureClick(image)"
             style="width: {{image.height}}px; height: 200px" 
             ng-class="{'pointer': editMode}"

@@ -129,14 +129,17 @@ app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi'
                                 }
                             })
                         } else {
-                            done
+                            done();
                             if (!scope.work.pictures) {
                                 scope.work.pictures = [];
                             }
                             scope.work.pictures.push({ picPath: file.name });
                         }
                     }
-                }); 
+                });
+                /*scope.dropzone.prototype.submitRequest = function(xhr, formData, files) {
+                    return xhr.send(files[0]);
+                }*/
             },
             scope: {
                 work: $scope.work,

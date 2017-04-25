@@ -51,10 +51,10 @@ router.post('/', function(req, res, next) {
                                 res.status(500).send("שגיאה בעת הוספת העבודה");
                             } else {
                                 // Create a new directory in the gallery folder
-                                var galleryDir = path.join('gallery', data.id);
+                                /*var galleryDir = path.join('gallery', data.id);
                                 if (!fs.existsSync(galleryDir)) {
                                     fs.mkdirSync(galleryDir);
-                                }
+                                }*/
 
                                 res.status(200).json(data);
                             }

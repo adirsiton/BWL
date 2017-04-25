@@ -61,7 +61,10 @@ app.controller("newWorkCtrl", function($scope, $mdDialog, worksApi, facebookApi)
                             $scope.work.pictures.push({ picPath: file.name });
                         }
                     }
-                }); 
+                });
+                /*$scope.dropzone.prototype.submitRequest = function(xhr, formData, files) {
+                    return xhr.send(files[0]);
+                };*/
             }).catch(function(err) {
                 $scope.saving = false;
                 $scope.saved = false;

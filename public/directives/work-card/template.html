@@ -1,6 +1,6 @@
 <md-card class="work">
     <img ng-src="/images/no-pic.png" class="md-card-image" ng-if="work.pictures == undefined || work.pictures.length ==0">
-    <img ng-src="/api/gallery/{{work._id}}/{{work.pictures[0].picPath}}" class="md-card-image" ng-if="work.pictures.length > 0">
+    <img ng-src="{{work.pictures[0].picPath}}" class="md-card-image" ng-if="work.pictures.length > 0">
     <div class="highlight">
         <div class="headline">{{work.title}}</div>
         <md-button class="md-fab md-primary md-success md-hue-2" ng-click="onClick({work: work})">
