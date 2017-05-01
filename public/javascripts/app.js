@@ -1,4 +1,4 @@
-var app = angular.module('bwl', ['ngRoute', 'ngMaterial', 'bwlServices', 'directives', 'wu.masonry', 'ngAnimate']);
+var app = angular.module('bwl', ['ngRoute', 'ngMaterial', 'bwlServices', 'directives', 'wu.masonry', 'ngAnimate', 'mdLightbox']);
 
 // Routing
 app.config(function($routeProvider, $mdThemingProvider, $mdIconProvider) {

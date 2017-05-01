@@ -28,12 +28,12 @@
             </md-card-actions>
         </md-card-content>
     </md-card>
-    <div id="gallery" masonry>
-        <img class="masonry-brick" 
+    <div id="gallery">
+        <img style="width:24%;height: 200px; margin:1px; cursor: pointer;" 
+            class="img-thumbnail"
             ng-repeat="image in work.pictures" 
             ng-src="{{image.picPath}}"
-            ng-click="pictureClick(image)"
-            style="width: {{image.height}}px; height: 200px" 
+            ng-click="pictureClick(image, $index)"
             ng-class="{'pointer': editMode}"
             ng-if="!image.hide">
     </div>
