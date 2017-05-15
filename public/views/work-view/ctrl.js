@@ -1,4 +1,4 @@
-app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi', '$location', '$timeout', '$mdDialog', '$rootScope', function($scope, $location, worksApi, facebookApi, $location, $timeout, $mdDialog, $rootScope) {
+app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi', '$location', '$timeout', '$mdDialog', '$rootScope', 'Lightbox', function($scope, $location, worksApi, facebookApi, $location, $timeout, $mdDialog, $rootScope, Lightbox) {
     $scope.work = {};
 
     $scope.init = function() {
@@ -13,7 +13,12 @@ app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi'
             // Init work pictures heights
             _.forEach($scope.work.pictures, function(pic) {
                 pic.height = 0.7 * heights[Math.floor(Math.random()*heights.length)];
-            })
+                pic.url = pic.picPath;
+            });
+
+            $scope.openLightboxModal = function (index) {
+                Lightbox.openModal($scope.work.pictures, index);
+            };
         }, function(res) {
             swal("שגיאה", "תקלה בעת קבלת הנתונים: " + res.data, "error");
         })
@@ -23,7 +28,7 @@ app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi'
 
     $scope.$on('$routeChangeSuccess', $scope.init);
 
-    $scope.pictureClick = function(pic) {
+    $scope.pictureClick = function(pic, index) {
         if ($scope.editMode) {
             worksApi.deletePicture($scope.work._id, pic.picPath).then(function() {
                 alertify.success("התמונה נמחקה בהצלחה");
@@ -31,6 +36,8 @@ app.controller("workViewCtrl", ['$scope', '$location', 'worksApi', 'facebookApi'
             }).catch(function(res) {
                 swal("שגיאה בעת מחיקת התמונה", res.data, "error");
             })
+        } else {
+            $scope.openLightboxModal(index);
         }
     }
 

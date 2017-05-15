@@ -8,6 +8,7 @@
   "dependencies": {
     "angular-masonry": "^0.16.0",
     "angular-material": "^1.1.1",
+    "angular-material-advanced-lightbox": "^0.1.1",
     "aws-sdk": "^2.36.0",
     "body-parser": "~1.15.2",
     "btoa": "^1.1.2",

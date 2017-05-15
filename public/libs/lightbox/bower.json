@@ -1,0 +1,24 @@
+{
+  "name": "angular-material-advanced-lightbox",
+  "version": "0.1.1",
+  "main": [
+    "dist/angular-material-advanced-lightbox.js",
+    "dist/angular-material-advanced-lightbox.css"
+  ],
+  "ignore": [
+    "src",
+    ".*",
+    "Gruntfile.js",
+    "package.json"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-material": "^1.1.0"
+  },
+  "devDependencies": {
+    "ng-videosharing-embed": "^0.3.4"
+  },
+  "resolutions": {
+    "angular": "^1.5.8"
+  }
+}
