@@ -14,6 +14,8 @@ app.controller("mainCtrl", ['$rootScope', '$scope', '$location', 'facebookApi', 
             else {
                 $rootScope.loggedIn = false;
                 $rootScope.loggedStatus = 'Login';
+                $rootScope.me = null;
+                $rootscope.smallUserPicPath = null;
             }
         });
     }
